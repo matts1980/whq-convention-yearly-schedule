@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WHQ Broadcasting – US Convention Yearly Schedule</title>
+<style>
+:root {
+  --navy: #1a2744;
+  --navy-mid: #243360;
+  --blue: #2d5be3;
+  --blue-light: #4a7af5;
+  --gold: #c8a84b;
+  --gold-light: #e0c170;
+  --cream: #f7f5f0;
+  --white: #ffffff;
+  --gray-soft: #e8e6e0;
+  --gray-mid: #9a98a0;
+  --text-dark: #1a1a2e;
+  --text-mid: #3d3b50;
+
+  --c-helpdesk:   #4a7af5;
+  --c-closeout:   #e07070;
+  --c-planning:   #7e9e5f;
+  --c-maintenance:#b07bd4;
+  --c-orders:     #e09040;
+  --c-design:     #2d5be3;
+  --c-training:   #40b0c8;
+  --c-upload:     #6080d4;
+  --c-budget:     #c8a84b;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--cream); color: var(--text-dark); }
+
+/* ── Header ── */
+header {
+  background: var(--navy);
+  color: var(--white);
+  padding: 24px 40px 0;
+  border-bottom: 3px solid var(--gold);
+}
+header .eyebrow { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold-light); margin-bottom: 6px; }
+header h1 { font-size: 22px; font-weight: 700; }
+header p { font-size: 12px; color: #a8b4cc; margin-top: 4px; margin-bottom: 16px; }
+
+/* ── Tab bar ── */
+.tabs { display: flex; gap: 4px; margin-top: 12px; }
+.tab-btn {
+  padding: 10px 22px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #a8b4cc;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  letter-spacing: 0.2px;
+  transition: all 0.15s;
+}
+.tab-btn:hover { color: var(--white); }
+.tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+/* ── Views ── */
+.view { display: none; padding: 28px 32px 60px; }
+.view.active { display: block; }
+
+/* ══════════════════════════════════════
+   VIEW 1 — GANTT
+══════════════════════════════════════ */
+.gantt-wrap { overflow-x: auto; }
+.gantt-table { border-collapse: collapse; min-width: 1100px; width: 100%; }
+.gantt-table th {
+  background: var(--navy);
+  color: var(--gold);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 8px 4px;
+  border: 1px solid var(--navy-mid);
+  white-space: nowrap;
+}
+.gantt-table th.label-col { text-align: left; padding-left: 10px; width: 240px; min-width: 240px; }
+.gantt-month { width: calc((100% - 240px) / 12); }
+
+.gantt-group td {
+  background: var(--navy-mid);
+  color: var(--gold-light);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 6px 10px;
+  border: 1px solid #1a2744;
+}
+.gantt-row td {
+  border: 1px solid var(--gray-soft);
+  padding: 0;
+  height: 38px;
+  vertical-align: middle;
+  background: var(--white);
+}
+.gantt-row td.row-label {
+  padding: 6px 10px;
+  font-size: 11.5px;
+  color: var(--text-dark);
+  white-space: normal;
+  line-height: 1.3;
+  background: #f9f8f5;
+  border-right: 2px solid var(--gray-soft);
+}
+.gantt-row:hover td { background: #f0f4ff; }
+.gantt-row:hover td.row-label { background: #e8eeff; }
+.gantt-cell { position: relative; }
+.gantt-bar {
+  position: absolute;
+  top: 6px; bottom: 6px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  padding: 0 5px;
+  font-size: 9.5px;
+  font-weight: 600;
+  color: var(--white);
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: default;
+  transition: opacity 0.15s;
+}
+.gantt-bar:hover { opacity: 0.85; }
+.gantt-owner-tag {
+  display: inline-block;
+  background: rgba(0,0,0,0.2);
+  border-radius: 2px;
+  padding: 1px 4px;
+  font-size: 8.5px;
+  margin-left: 4px;
+}
+.task-num-g {
+  display: inline-block;
+  background: rgba(0,0,0,0.25);
+  border-radius: 2px;
+  padding: 1px 4px;
+  font-size: 9px;
+  margin-right: 4px;
+}
+
+/* ══════════════════════════════════════
+   VIEW 2 — MONTHLY CALENDAR GRID
+══════════════════════════════════════ */
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+.cal-month {
+  background: var(--white);
+  border: 1px solid var(--gray-soft);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.cal-month-header {
+  background: var(--navy);
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 10px 14px;
+}
+.cal-tasks { padding: 10px; display: flex; flex-direction: column; gap: 5px; min-height: 60px; }
+.cal-task {
+  border-radius: 4px;
+  padding: 5px 8px;
+  font-size: 11px;
+  color: var(--white);
+  line-height: 1.35;
+}
+.cal-task .ct-num { font-weight: 700; opacity: 0.85; margin-right: 3px; }
+.cal-task .ct-owner { display: block; font-size: 9.5px; opacity: 0.8; margin-top: 2px; }
+.cal-empty { color: var(--gray-mid); font-size: 11px; font-style: italic; padding: 10px; }
+
+/* ══════════════════════════════════════
+   VIEW 3 — PHASE TIMELINE
+══════════════════════════════════════ */
+.timeline-wrap { position: relative; padding-left: 40px; }
+.timeline-spine {
+  position: absolute;
+  left: 16px; top: 0; bottom: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, var(--navy), var(--blue-light));
+  border-radius: 2px;
+}
+.tl-month-band { margin-bottom: 0; }
+.tl-month-label {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  margin-top: 24px;
+}
+.tl-month-dot {
+  position: absolute;
+  left: -32px;
+  width: 18px; height: 18px;
+  background: var(--navy);
+  border: 3px solid var(--gold);
+  border-radius: 50%;
+}
+.tl-month-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.tl-month-line {
+  flex: 1;
+  height: 1px;
+  background: var(--gray-soft);
+}
+.tl-tasks { display: flex; flex-direction: column; gap: 7px; margin-bottom: 4px; }
+.tl-task {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: var(--white);
+  border: 1px solid var(--gray-soft);
+  border-radius: 6px;
+  padding: 9px 12px;
+  border-left: 4px solid var(--blue-light);
+}
+.tl-task-num {
+  font-size: 10px; font-weight: 700;
+  color: var(--white);
+  background: var(--navy);
+  border-radius: 3px;
+  padding: 2px 6px;
+  white-space: nowrap;
+  margin-top: 1px;
+  flex-shrink: 0;
+}
+.tl-task-body { flex: 1; }
+.tl-task-desc { font-size: 12.5px; font-weight: 600; color: var(--text-dark); line-height: 1.35; }
+.tl-task-meta { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 5px; }
+.tl-tag {
+  font-size: 10px; padding: 1px 7px; border-radius: 20px; font-weight: 500;
+}
+.tl-tag.owner { background: #eef2ff; color: var(--blue); border: 1px solid #c8d4f8; }
+.tl-tag.cat { background: #fdf6e8; color: #8a6010; border: 1px solid #e8d8a0; }
+.tl-tag.dates { background: #f0f8f0; color: #3a6a3a; border: 1px solid #b0d8b0; }
+
+/* ── Shared legend ── */
+.legend-bar {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin-bottom: 20px;
+  padding: 12px 16px;
+  background: var(--white);
+  border: 1px solid var(--gray-soft);
+  border-radius: 6px;
+}
+.leg { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--text-mid); }
+.leg-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+
+@media (max-width: 800px) {
+  .cal-grid { grid-template-columns: repeat(2,1fr); }
+  header { padding: 16px 16px 0; }
+  .view { padding: 16px 12px 40px; }
+  .tab-btn { padding: 8px 12px; font-size: 11px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">WHQ Broadcasting · US Conventions</div>
+  <h1>Yearly Schedule — All Views</h1>
+  <p>Choose a view format below · Full task detail with owner tags and dates</p>
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('gantt',this)">① Gantt Bar Chart</button>
+    <button class="tab-btn" onclick="switchTab('calendar',this)">② Monthly Calendar Grid</button>
+    <button class="tab-btn" onclick="switchTab('timeline',this)">③ Phase Timeline</button>
+  </div>
+</header>
+
+<!-- ══════════════════════════════════════════════════════════
+     VIEW 1 — GANTT
+══════════════════════════════════════════════════════════ -->
+<div class="view active" id="view-gantt">
+
+  <div class="legend-bar">
+    <div class="leg"><div class="leg-dot" style="background:var(--c-helpdesk)"></div>Support/Helpdesk</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--c-closeout)"></div>Closeout</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--c-planning)"></div>Planning</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--c-maintenance)"></div>Maintenance</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--c-orders)"></div>Orders</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--c-design)"></div>Design</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--c-training)"></div>Training</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--c-upload)"></div>Upload</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--c-budget)"></div>Budget</div>
+  </div>
+
+  <div class="gantt-wrap">
+  <table class="gantt-table" id="ganttTable">
+    <thead>
+      <tr>
+        <th class="label-col">Task</th>
+        <th class="gantt-month">JAN</th>
+        <th class="gantt-month">FEB</th>
+        <th class="gantt-month">MAR</th>
+        <th class="gantt-month">APR</th>
+        <th class="gantt-month">MAY</th>
+        <th class="gantt-month">JUN</th>
+        <th class="gantt-month">JUL</th>
+        <th class="gantt-month">AUG</th>
+        <th class="gantt-month">SEP</th>
+        <th class="gantt-month">OCT</th>
+        <th class="gantt-month">NOV</th>
+        <th class="gantt-month">DEC</th>
+      </tr>
+    </thead>
+    <tbody id="ganttBody"></tbody>
+  </table>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     VIEW 2 — MONTHLY CALENDAR GRID
+══════════════════════════════════════════════════════════ -->
+<div class="view" id="view-calendar">
+  <div class="legend-bar">
+    <div class="leg"><div class="leg-dot" style="background:var(--c-helpdesk)"></div>Support/Helpdesk</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--c-closeout)"></div>Closeout</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--c-planning)"></div>Planning</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--c-maintenance)"></div>Maintenance</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--c-orders)"></div>Orders</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--c-design)"></div>Design</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--c-training)"></div>Training</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--c-upload)"></div>Upload</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--c-budget)"></div>Budget</div>
+  </div>
+  <div class="cal-grid" id="calGrid"></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     VIEW 3 — PHASE TIMELINE
+══════════════════════════════════════════════════════════ -->
+<div class="view" id="view-timeline">
+  <div class="legend-bar">
+    <div class="leg"><div class="leg-dot" style="background:var(--c-helpdesk)"></div>Support/Helpdesk</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--c-closeout)"></div>Closeout</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--c-planning)"></div>Planning</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--c-maintenance)"></div>Maintenance</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--c-orders)"></div>Orders</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--c-design)"></div>Design</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--c-training)"></div>Training</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--c-upload)"></div>Upload</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--c-budget)"></div>Budget</div>
+  </div>
+  <div class="timeline-wrap">
+    <div class="timeline-spine"></div>
+    <div id="tlContent"></div>
+  </div>
+</div>
+
+<script>
+// ── Task data ──
+// startMonth / endMonth: 1-12, startDay / endDay: 1-31
+const TASKS = [
+  // HELPDESK / CONVENTION SUPPORT
+  { num:'53', desc:'Call Center (Design, Convention Equipment, backup) on Teams', owner:'AV Contacts · Call Center', cat:'helpdesk', startMonth:5, startDay:15, endMonth:6, endDay:1 },
+  { num:'54', desc:'On-site Training Visits', owner:'Design/Support Coordinator', cat:'helpdesk', startMonth:5, startDay:15, endMonth:6, endDay:1 },
+  { num:'55', desc:'Site Visits by AV Contacts as Needed', owner:'AV Contacts', cat:'helpdesk', startMonth:5, startDay:15, endMonth:9, endDay:1 },
+  { num:'56', desc:'Thursday – Contact each Program Overseer including Assembly Halls', owner:'AV Contacts · Call Center', cat:'helpdesk', startMonth:5, startDay:15, endMonth:9, endDay:1 },
+
+  // CLOSEOUT
+  { num:'57', desc:'Evaluation of AVC Roles for next year and adjustments', owner:'Design/Support Coordinator', cat:'closeout', startMonth:8, startDay:15, endMonth:9, endDay:15 },
+  { num:'58', desc:'Contact Program Overseers 1 week after convention', owner:'AV Contacts', cat:'closeout', startMonth:8, startDay:15, endMonth:9, endDay:15 },
+  { num:'62', desc:'Request training for November (4-month lead time)', owner:'Design/Support Coordinator', cat:'closeout', startMonth:8, startDay:15, endMonth:9, endDay:15 },
+  { num:'3',  desc:'Contact each Program Overseer 1 week after last event for feedback', owner:'AV Contacts', cat:'closeout', startMonth:8, startDay:15, endMonth:9, endDay:15 },
+  { num:'4',  desc:'AV Contact to compile list for each venue & add to Hub support incident', owner:'AV Contacts', cat:'closeout', startMonth:8, startDay:15, endMonth:9, endDay:15 },
+  { num:'5',  desc:'Hub Lessons Learned task to be linked to design task', owner:'AV Contacts', cat:'closeout', startMonth:8, startDay:15, endMonth:9, endDay:15 },
+  { num:'6',  desc:'Prepare Summary for Oversight: Repairs, Issues, Training Needs', owner:'US Regional Convention Team', cat:'closeout', startMonth:9, startDay:1, endMonth:9, endDay:30 },
+  { num:'11', desc:'Office sends email to all Program Overseers from previous conventions', owner:'Office', cat:'closeout', startMonth:9, startDay:15, endMonth:10, endDay:1 },
+
+  // PLANNING
+  { num:'1',  desc:'Request from Service Dept next year\'s venues', owner:'US Regional Convention Team', cat:'planning', startMonth:7, startDay:1, endMonth:7, endDay:31 },
+  { num:'2',  desc:'Fleet plans routes and determines equipment purchases', owner:'EFS - Routing', cat:'planning', startMonth:7, startDay:1, endMonth:7, endDay:31 },
+  { num:'7',  desc:'Plan Site Visits for Training along with Service Dept Contract Rep', owner:'Convention Team · Evaluation Team', cat:'planning', startMonth:9, startDay:1, endMonth:9, endDay:30 },
+  { num:'8',  desc:'Plan Site Visits for New Sites along with Service Dept Contract Rep', owner:'Convention Team · Evaluation Team', cat:'planning', startMonth:9, startDay:1, endMonth:9, endDay:30 },
+  { num:'9',  desc:'Plan equipment routing for Site Visits (Training Kit etc.)', owner:'Convention Team · Evaluation Team', cat:'planning', startMonth:9, startDay:1, endMonth:9, endDay:30 },
+  { num:'10A',desc:'Draft Letter to Program Overseers (new venues) & rented venues', owner:'US Regional Convention Team', cat:'planning', startMonth:9, startDay:15, endMonth:10, endDay:1 },
+
+  // MAINTENANCE
+  { num:'12', desc:'Review all Hub repair cards – Recommend Equipment Replacements', owner:'Equipment Coordinator', cat:'maintenance', startMonth:9, startDay:1, endMonth:11, endDay:30 },
+  { num:'13', desc:'Test & Upgrade Firmware for Convention Equipment', owner:'Equipment Coordinator', cat:'maintenance', startMonth:9, startDay:1, endMonth:11, endDay:30 },
+  { num:'16', desc:'AV Contacts to update Hub cards with list of changes & close all support cards', owner:'AV Contacts', cat:'maintenance', startMonth:10, startDay:1, endMonth:10, endDay:31 },
+  { num:'17', desc:'Confirm AV Hub Designs have long lead items added (Video Walls, TVs)', owner:'US Regional Convention Team', cat:'maintenance', startMonth:10, startDay:15, endMonth:10, endDay:31 },
+  { num:'25', desc:'Convention Equipment Crew to Construct new Equipment purchased', owner:'Equipment Coordinator', cat:'maintenance', startMonth:3, startDay:1, endMonth:3, endDay:15 },
+  { num:'26', desc:'Media Players are imaged for convention season', owner:'Equipment Coordinator', cat:'maintenance', startMonth:3, startDay:1, endMonth:3, endDay:15 },
+  { num:'27', desc:'Confirm list for firmware upgrades needed', owner:'Equipment Coordinator', cat:'maintenance', startMonth:3, startDay:1, endMonth:3, endDay:15 },
+  { num:'28', desc:'All Convention Equipment to be received for Assembling', owner:'Equipment Coordinator', cat:'maintenance', startMonth:3, startDay:1, endMonth:3, endDay:15 },
+
+  // ORDERS
+  { num:'14', desc:'Long Lead Items Ordered from China for Conventions', owner:'Equipment Coordinator', cat:'orders', startMonth:10, startDay:15, endMonth:11, endDay:1 },
+  { num:'15', desc:'Approval to Order Equipment', owner:'Equipment Coordinator', cat:'orders', startMonth:12, startDay:1, endMonth:12, endDay:31 },
+  { num:'18', desc:'All Convention Equipment for season to be ordered', owner:'Equipment Coordinator', cat:'orders', startMonth:1, startDay:31, endMonth:2, endDay:1 },
+  { num:'24', desc:'All Convention Equipment for the islands in Hub for shipping', owner:'US Regional Convention Team', cat:'orders', startMonth:2, startDay:1, endMonth:2, endDay:15 },
+  { num:'49', desc:'Fixed Asset Review Submitted to Office', owner:'Equipment Coordinator', cat:'orders', startMonth:4, startDay:1, endMonth:4, endDay:15 },
+  { num:'50', desc:'Equipment starts shipping to the field', owner:'Equipment Coordinator', cat:'orders', startMonth:4, startDay:1, endMonth:4, endDay:15 },
+
+  // DESIGN
+  { num:'21', desc:'Update Template – Locally Supplied Excel Sheet', owner:'US Regional Convention Team', cat:'design', startMonth:1, startDay:1, endMonth:1, endDay:15 },
+  { num:'22', desc:'Update Engineering: list of languages and date of first event', owner:'US Regional Convention Team', cat:'design', startMonth:1, startDay:1, endMonth:1, endDay:15 },
+  { num:'23', desc:'Update: Draft Changes to CO-160a', owner:'Convention Team · Equip. Coordinator', cat:'design', startMonth:1, startDay:1, endMonth:1, endDay:31 },
+  { num:'29', desc:'Markup minor designs with PDF editor', owner:'AV Contacts', cat:'design', startMonth:12, startDay:15, endMonth:3, endDay:1 },
+  { num:'30', desc:'Add Equipment to Hub Design Card for initial review', owner:'AV Contacts', cat:'design', startMonth:12, startDay:15, endMonth:2, endDay:15 },
+  { num:'31', desc:'Send Design to Drafting Team', owner:'AV Contacts', cat:'design', startMonth:2, startDay:1, endMonth:2, endDay:15 },
+  { num:'32', desc:'Send Design to AV Design Reviewer', owner:'AV Contacts · AV Reviewer', cat:'design', startMonth:2, startDay:1, endMonth:3, endDay:1 },
+  { num:'33', desc:'Update the Locally Supplied Excel Sheet for each Venue', owner:'AV Contacts', cat:'design', startMonth:2, startDay:1, endMonth:3, endDay:1 },
+  { num:'34', desc:'Bi-weekly Coordination Meeting with Convention Equipment Crew', owner:'AV Contacts', cat:'design', startMonth:2, startDay:1, endMonth:3, endDay:1 },
+  { num:'35', desc:'Weekly Meetings with Documentation & EFS', owner:'AV Contacts', cat:'design', startMonth:2, startDay:21, endMonth:3, endDay:1 },
+  { num:'36', desc:'Copy DSP scene file to "Final" Folder for JW Drive upload', owner:'AV Contacts', cat:'design', startMonth:2, startDay:21, endMonth:3, endDay:1 },
+  { num:'38', desc:'Provide feedback for Streamed Meeting (Program Overseers & AV Depts)', owner:'Design/Support Coordinator', cat:'design', startMonth:3, startDay:1, endMonth:3, endDay:1 },
+  { num:'39', desc:'Finalize AV Design Cards', owner:'AV Contacts · Design/Support', cat:'design', startMonth:2, startDay:1, endMonth:3, endDay:15 },
+  { num:'40', desc:'All Convention Designs marked Approved in Hub', owner:'Design/Support Coordinator', cat:'design', startMonth:3, startDay:15, endMonth:3, endDay:20 },
+  { num:'20', desc:'Site Visits and Evaluations for New Venues', owner:'AV Contacts', cat:'design', startMonth:12, startDay:1, endMonth:1, endDay:1 },
+
+  // TRAINING
+  { num:'19', desc:'Yearly Training at Tuxedo – Convention Equipment and Design (1 week)', owner:'AV Contacts · Tech Support', cat:'training', startMonth:11, startDay:5, endMonth:11, endDay:24 },
+  { num:'43', desc:'AV Contacts to meet with first Program Overseer for each New Venue', owner:'AV Contacts', cat:'training', startMonth:4, startDay:1, endMonth:4, endDay:15 },
+  { num:'44', desc:'Convention Streamed Meeting with Program Overseers & AV Departments', owner:'AVD Oversight', cat:'training', startMonth:4, startDay:1, endMonth:4, endDay:15 },
+  { num:'45', desc:'Kick off Meeting for Help Desk Support', owner:'Design/Support Coordinator', cat:'training', startMonth:4, startDay:15, endMonth:5, endDay:1 },
+  { num:'46', desc:'Individual Training on Tech Support process (Call Log, Calls, Teams)', owner:'AV Contacts', cat:'training', startMonth:4, startDay:15, endMonth:5, endDay:1 },
+  { num:'47', desc:'Finalize Schedule for Call Center Support', owner:'Design/Support Coordinator', cat:'training', startMonth:4, startDay:15, endMonth:5, endDay:1 },
+  { num:'48', desc:'First Convention recording at Newburgh & start of convention season', owner:'TMS', cat:'training', startMonth:5, startDay:1, endMonth:5, endDay:15 },
+
+  // UPLOAD
+  { num:'41', desc:'Notify Service Dept which videos/files need to be posted on JWHub', owner:'Design/Support Coordinator', cat:'upload', startMonth:4, startDay:1, endMonth:4, endDay:5 },
+  { num:'42', desc:'Office upload from "Final" folders to JW Drive (Drawings, Scene Files, Shipping)', owner:'Design/Support Coordinator', cat:'upload', startMonth:4, startDay:1, endMonth:4, endDay:5 },
+
+  // BUDGET
+  { num:'51', desc:'Convention Equipment Upgrade Finalized (Research and Pricing)', owner:'Equipment Coordinator', cat:'budget', startMonth:5, startDay:1, endMonth:5, endDay:31 },
+  { num:'52', desc:'Yearly Budget due by June 20th for Major items', owner:'Equipment Coordinator · Design/Support', cat:'budget', startMonth:6, startDay:1, endMonth:6, endDay:20 },
+];
+
+const CAT_COLORS = {
+  helpdesk:    'var(--c-helpdesk)',
+  closeout:    'var(--c-closeout)',
+  planning:    'var(--c-planning)',
+  maintenance: 'var(--c-maintenance)',
+  orders:      'var(--c-orders)',
+  design:      'var(--c-design)',
+  training:    'var(--c-training)',
+  upload:      'var(--c-upload)',
+  budget:      'var(--c-budget)',
+};
+
+const CAT_LABELS = {
+  helpdesk:'Support/Helpdesk', closeout:'Closeout', planning:'Planning',
+  maintenance:'Maintenance', orders:'Orders', design:'Design',
+  training:'Training', upload:'Upload', budget:'Budget',
+};
+
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+// ── helper: day of year (1-365)
+function doy(month, day) { 
+  const days=[0,31,59,90,120,151,181,212,243,273,304,334];
+  return days[month-1]+day;
+}
+const YEAR_DAYS = 365;
+
+// ═══════════════════════════════════
+// BUILD GANTT
+// ═══════════════════════════════════
+function buildGantt() {
+  const body = document.getElementById('ganttBody');
+  // Group by category
+  const groups = {};
+  TASKS.forEach(t => {
+    if (!groups[t.cat]) groups[t.cat] = [];
+    groups[t.cat].push(t);
+  });
+
+  const catOrder = ['helpdesk','closeout','planning','maintenance','orders','design','training','upload','budget'];
+  catOrder.forEach(cat => {
+    if (!groups[cat]) return;
+    // Group header row
+    const gr = document.createElement('tr');
+    gr.className = 'gantt-group';
+    const gTd = document.createElement('td');
+    gTd.colSpan = 13;
+    gTd.textContent = CAT_LABELS[cat].toUpperCase();
+    gr.appendChild(gTd);
+    body.appendChild(gr);
+
+    groups[cat].forEach(task => {
+      const tr = document.createElement('tr');
+      tr.className = 'gantt-row';
+
+      // Label cell
+      const labelTd = document.createElement('td');
+      labelTd.className = 'row-label';
+      labelTd.innerHTML = `<strong>#${task.num}</strong> ${task.desc}<br><small style="color:var(--gray-mid)">${task.owner}</small>`;
+      tr.appendChild(labelTd);
+
+      // 12 month cells
+      for (let m = 1; m <= 12; m++) {
+        const td = document.createElement('td');
+        td.className = 'gantt-cell';
+        td.style.position = 'relative';
+
+        // Does this task span into this month?
+        const mStart = doy(m, 1);
+        const mEnd   = doy(m, 31);
+
+        // Task start/end in doy, handle wrap (Dec→Jan)
+        let tStart = doy(task.startMonth, task.startDay);
+        let tEnd   = doy(task.endMonth,   task.endDay);
+        if (tEnd < tStart) tEnd += YEAR_DAYS; // wraps
+
+        // Current month in doy — also handle wrap check
+        let cStart = doy(m, 1);
+        let cEnd   = doy(m, 28);
+
+        // Check overlap (also handle Dec tasks that might reference month 12 with wrap)
+        const overlap = tStart <= cEnd && tEnd >= cStart;
+
+        if (overlap) {
+          const bar = document.createElement('div');
+          bar.className = 'gantt-bar';
+          bar.style.background = CAT_COLORS[task.cat];
+
+          // Calculate left/right % within this month cell
+          const cellDays = 30;
+          const barStartInCell = Math.max(0, tStart - cStart);
+          const barEndInCell   = Math.min(cellDays, tEnd - cStart);
+          const leftPct  = (barStartInCell / cellDays) * 100;
+          const rightPct = ((cellDays - barEndInCell) / cellDays) * 100;
+          bar.style.left  = leftPct + '%';
+          bar.style.right = rightPct + '%';
+          bar.title = `#${task.num} · ${task.desc} · ${task.owner}`;
+
+          // Only show label text in the first month of the bar
+          if (m === task.startMonth || (task.startMonth > 11 && m === 1)) {
+            bar.innerHTML = `<span class="task-num-g">#${task.num}</span><span style="overflow:hidden;text-overflow:ellipsis">${task.desc}</span>`;
+          }
+
+          td.appendChild(bar);
+        }
+        tr.appendChild(td);
+      }
+      body.appendChild(tr);
+    });
+  });
+}
+
+// ═══════════════════════════════════
+// BUILD CALENDAR GRID
+// ═══════════════════════════════════
+function buildCalendar() {
+  const grid = document.getElementById('calGrid');
+  for (let m = 1; m <= 12; m++) {
+    const col = document.createElement('div');
+    col.className = 'cal-month';
+
+    const hdr = document.createElement('div');
+    hdr.className = 'cal-month-header';
+    hdr.textContent = MONTHS[m-1].toUpperCase();
+    col.appendChild(hdr);
+
+    const tasksDiv = document.createElement('div');
+    tasksDiv.className = 'cal-tasks';
+
+    const monthTasks = TASKS.filter(t => {
+      let tStart = doy(t.startMonth, t.startDay);
+      let tEnd   = doy(t.endMonth,   t.endDay);
+      if (tEnd < tStart) tEnd += YEAR_DAYS;
+      const cStart = doy(m, 1);
+      const cEnd   = doy(m, 28);
+      return tStart <= cEnd && tEnd >= cStart;
+    });
+
+    if (monthTasks.length === 0) {
+      tasksDiv.innerHTML = '<div class="cal-empty">No tasks this month</div>';
+    } else {
+      monthTasks.forEach(t => {
+        const el = document.createElement('div');
+        el.className = 'cal-task';
+        el.style.background = CAT_COLORS[t.cat];
+        el.innerHTML = `<span class="ct-num">#${t.num}</span>${t.desc}<span class="ct-owner">${t.owner}</span>`;
+        tasksDiv.appendChild(el);
+      });
+    }
+
+    col.appendChild(tasksDiv);
+    grid.appendChild(col);
+  }
+}
+
+// ═══════════════════════════════════
+// BUILD TIMELINE
+// ═══════════════════════════════════
+function buildTimeline() {
+  const content = document.getElementById('tlContent');
+
+  for (let m = 1; m <= 12; m++) {
+    const monthTasks = TASKS.filter(t => {
+      // Show task in the month it STARTS (primary placement)
+      return t.startMonth === m;
+    });
+
+    const band = document.createElement('div');
+    band.className = 'tl-month-band';
+
+    const labelRow = document.createElement('div');
+    labelRow.className = 'tl-month-label';
+    labelRow.innerHTML = `
+      <div class="tl-month-dot"></div>
+      <div class="tl-month-name">${MONTHS[m-1]}</div>
+      <div class="tl-month-line"></div>
+    `;
+    band.appendChild(labelRow);
+
+    if (monthTasks.length === 0) {
+      const empty = document.createElement('div');
+      empty.style.cssText = 'color:var(--gray-mid);font-size:11px;font-style:italic;padding:4px 0 8px;';
+      empty.textContent = 'No new tasks start this month';
+      band.appendChild(empty);
+    } else {
+      const taskWrap = document.createElement('div');
+      taskWrap.className = 'tl-tasks';
+      monthTasks.forEach(t => {
+        const dateStr = t.startMonth === t.endMonth
+          ? `${MONTHS[t.startMonth-1].slice(0,3)} ${t.startDay} – ${t.endDay}`
+          : `${MONTHS[t.startMonth-1].slice(0,3)} ${t.startDay} – ${MONTHS[t.endMonth-1].slice(0,3)} ${t.endDay}`;
+
+        const el = document.createElement('div');
+        el.className = 'tl-task';
+        el.style.borderLeftColor = CAT_COLORS[t.cat];
+        el.innerHTML = `
+          <span class="tl-task-num">#${t.num}</span>
+          <div class="tl-task-body">
+            <div class="tl-task-desc">${t.desc}</div>
+            <div class="tl-task-meta">
+              <span class="tl-tag owner">${t.owner}</span>
+              <span class="tl-tag cat">${CAT_LABELS[t.cat]}</span>
+              <span class="tl-tag dates">${dateStr}</span>
+            </div>
+          </div>
+        `;
+        taskWrap.appendChild(el);
+      });
+      band.appendChild(taskWrap);
+    }
+
+    content.appendChild(band);
+  }
+}
+
+// ═══════════════════════════════════
+// Tab switching
+// ═══════════════════════════════════
+function switchTab(view, btn) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('view-' + view).classList.add('active');
+  btn.classList.add('active');
+}
+
+// Init all 3
+buildGantt();
+buildCalendar();
+buildTimeline();
+</script>
+</body>
+</html>
