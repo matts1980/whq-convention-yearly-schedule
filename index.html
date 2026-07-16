@@ -468,11 +468,10 @@ body.progress-on .gantt-row.is-past td.row-label { font-style: italic; color: va
 const TASKS = [
   // HELPDESK / CONVENTION SUPPORT
   { num:'53', desc:'Schedule Helpdesk Team based on number of conventions each weekend', owner:'US Regional Convention Team · Support', cat:'helpdesk', startMonth:5, startDay:15, endMonth:6, endDay:1 },
-  { num:'54', desc:'Provide list of sites for following year that could benefit from convention training visit', owner:'Zone Contacts & Assistants', cat:'closeout', startMonth:8, startDay:1, endMonth:8, endDay:15 },
-  { num:'72', desc:'Support Kick-Off Meeting with First PO\'s', owner:'Support', cat:'kickoff', startMonth:11, startDay:1, endMonth:12, endDay:1 },
-  { num:'77', desc:'Setup Hub Incidents for all Convention Sites', owner:'Support · Office', cat:'kickoff', startMonth:1, startDay:1, endMonth:1, endDay:15 },
-  { num:'74', desc:'Confirm list of JW Stream and special events from Service Dept', owner:'US Regional Convention Team · Support', cat:'kickoff', startMonth:1, startDay:1, endMonth:1, endDay:15 },
-  { num:'75', desc:'Confirm list of Circuit Assemblies', owner:'US Regional Convention Team · Support', cat:'kickoff', startMonth:1, startDay:1, endMonth:1, endDay:15 },
+  { num:'72', desc:'Kick-Off Meeting with First PO\'s (Appendix G)', owner:'Support · Zone Contacts & Assistants', cat:'kickoff', startMonth:11, startDay:1, endMonth:12, endDay:1 },
+  { num:'77', desc:'Setup Hub Incidents for all Convention Sites', owner:'Support · Office', cat:'kickoff', startMonth:8, startDay:1, endMonth:8, endDay:31 },
+  { num:'74', desc:'Confirm list of JW Stream and special events from Service Dept', owner:'US Regional Convention Team · Support', cat:'kickoff', startMonth:9, startDay:15, endMonth:9, endDay:30 },
+  { num:'75', desc:'Confirm list of Circuit Assemblies', owner:'US Regional Convention Team · Support', cat:'kickoff', startMonth:9, startDay:15, endMonth:9, endDay:30 },
   { num:'55', desc:'Convention Site Visits', owner:'Convention Trainers', cat:'sitetraining', startMonth:5, startDay:15, endMonth:8, endDay:31 },
   { num:'56', desc:'Convention Helpdesk Coverage', owner:'Helpdesk Team', cat:'helpdesk', startMonth:5, startDay:15, endMonth:8, endDay:31 },
   { num:'71', desc:'Convention Helpdesk Escalation Support', owner:'EFS', cat:'helpdesk', startMonth:5, startDay:15, endMonth:8, endDay:31 },
@@ -480,28 +479,27 @@ const TASKS = [
   // CLOSEOUT
   { num:'57', desc:'Review number of events per Zone', owner:'US Regional Convention Team', cat:'closeout', startMonth:8, startDay:15, endMonth:8, endDay:31 },
   { num:'70', desc:'Compile Documentation Suggestions', owner:'US Regional Convention Team', cat:'closeout', startMonth:8, startDay:1, endMonth:8, endDay:15 },
-  { num:'58', desc:'Send email to schedule Lessons Learned Meetings', owner:'Zone Contacts & Assistants', cat:'design', startMonth:5, startDay:1, endMonth:6, endDay:30 },
-  { num:'67', desc:'Lessons Learned meetings held local drawings & suggestions added to Hub & Sharepoint', owner:'Zone Contacts & Assistants', cat:'design', startMonth:6, startDay:15, endMonth:8, endDay:31 },
+  { num:'58', desc:'Send email to schedule Lessons Learned Meetings (Appendix T)', owner:'Zone Contacts & Assistants · Support', cat:'design', startMonth:5, startDay:1, endMonth:6, endDay:30 },
+  { num:'67', desc:'Update Hub Venue Incident with Lessons Learned Notes', owner:'Zone Contacts & Assistants · Support', cat:'design', startMonth:6, startDay:15, endMonth:8, endDay:31 },
   { num:'62', desc:'Request Rooming and Confirm Team Travel', owner:'US Regional Convention Team', cat:'training', startMonth:5, startDay:15, endMonth:6, endDay:1 },
-  { num:'4',  desc:'Lessons Learned Meeting Follow Up - Update HuB Venue Comments incident for year site', owner:'Zone Contacts & Assistants', cat:'zonecloseout', startMonth:8, startDay:15, endMonth:9, endDay:15 },
-  { num:'5',  desc:'Lessons Learned Meeting - Obtain Local Markups of drawings. Save to Design folder. Create redline with information', owner:'Zone Contacts & Assistants', cat:'zonecloseout', startMonth:8, startDay:15, endMonth:9, endDay:15 },
+  { num:'4',  desc:'Review published information & Training (CO-160, CO-160A, CO-1, WHQ Sharepoint, JW CAD) etc', owner:'Zone Contacts & Assistants', cat:'training', startMonth:9, startDay:1, endMonth:9, endDay:30 },
+  { num:'5',  desc:'Lessons Learned meeting (See Appendix T for Steps & Template)', owner:'Zone Contacts & Assistants · Support', cat:'closeout', startMonth:8, startDay:1, endMonth:8, endDay:31 },
   { num:'6',  desc:'Prepare Summary for Oversight: Repairs, Issues, Training Needs', owner:'US Regional Convention Team', cat:'closeout', startMonth:8, startDay:15, endMonth:8, endDay:31 },
   { num:'11', desc:'Office sends email to all Program Overseers from previous conventions', owner:'US Regional Convention Team', cat:'kickoff', startMonth:9, startDay:15, endMonth:10, endDay:1 },
 
   // PLANNING
-  { num:'1',  desc:'Request next year venue list from Service Department', owner:'US Regional Convention Team', cat:'planning', startMonth:7, startDay:1, endMonth:7, endDay:31 },
-  { num:'2',  desc:'Plan Routes and determine equipment purchases', owner:'EFS', cat:'planning', startMonth:8, startDay:1, endMonth:8, endDay:15 },
-  { num:'7',  desc:'Recommend Sites for Convention Training Visits and Convention Site Visits', owner:'Zone Contacts & Assistants', cat:'planning', startMonth:8, startDay:1, endMonth:8, endDay:15 },
-  { num:'8',  desc:'Obtain preliminary new site list', owner:'US Regional Convention Team', cat:'planning', startMonth:8, startDay:1, endMonth:8, endDay:15 },
+  { num:'2',  desc:'Plan Routes and determine equipment purchases', owner:'EFS', cat:'planning', startMonth:10, startDay:1, endMonth:10, endDay:15 },
+  { num:'7',  desc:'Identify Sites for Convention Training', owner:'US Regional Convention Team', cat:'planning', startMonth:9, startDay:15, endMonth:10, endDay:15 },
+  { num:'8',  desc:'Review list of New Sites from HuB', owner:'US Regional Convention Team', cat:'planning', startMonth:9, startDay:1, endMonth:9, endDay:15 },
   { num:'9',  desc:'Plan equipment routing for Site Visits (Training Kit etc.)', owner:'Convention Trainers', cat:'sitetraining', startMonth:1, startDay:1, endMonth:1, endDay:31 },
   { num:'68', desc:'Update Convention Training Course Material', owner:'US Regional Convention Team', cat:'sitetraining', startMonth:9, startDay:15, endMonth:12, endDay:1 },
   { num:'69', desc:'Schedule Online Training', owner:'Convention Trainers', cat:'sitetraining', startMonth:2, startDay:1, endMonth:2, endDay:15 },
-  { num:'10A',desc:'Draft Letter to Program Overseers (new venues) & rented venues', owner:'US Regional Convention Team', cat:'kickoff', startMonth:9, startDay:15, endMonth:10, endDay:1 },
+  { num:'10A',desc:'Draft Letter to Program Overseers (new venues) & rented venues', owner:'US Regional Convention Team · Office', cat:'kickoff', startMonth:9, startDay:1, endMonth:9, endDay:15 },
 
   // MAINTENANCE
-  { num:'12', desc:'Review Tech Chat & Hub Incidents Recommend Repair & Replacements', owner:'EFS · AVD Oversight · US Regional Convention Team', cat:'maintenance', startMonth:8, startDay:1, endMonth:9, endDay:15 },
+  { num:'12', desc:'Review Tech Chat & Hub Incidents Recommend Repair & Replacements', owner:'EFS · AVD Oversight · US Regional Convention Team', cat:'maintenance', startMonth:9, startDay:1, endMonth:9, endDay:30 },
   { num:'13', desc:'Test & Upgrade Firmware for Convention Equipment', owner:'EFS', cat:'maintenance', startMonth:11, startDay:1, endMonth:12, endDay:31 },
-  { num:'16', desc:'Zone Contacts & Assistants to update Hub cards with list of changes & close all support cards', owner:'Zone Contacts & Assistants', cat:'zonecloseout', startMonth:10, startDay:1, endMonth:10, endDay:31 },
+  { num:'16', desc:'Zone Contacts & Assistants to update Hub cards with list of changes & close all support cards', owner:'Zone Contacts & Assistants', cat:'closeout', startMonth:9, startDay:15, endMonth:9, endDay:30 },
   { num:'17', desc:'Confirm AV Hub Designs have long lead items added (Video Walls, TVs)', owner:'Zone Contacts & Assistants', cat:'design', startMonth:10, startDay:15, endMonth:10, endDay:31 },
   { num:'25', desc:'Convention Equipment Crew to Construct new Equipment purchased', owner:'EFS', cat:'maintenance', startMonth:3, startDay:1, endMonth:3, endDay:15 },
   { num:'26', desc:'Media Players are imaged for convention season', owner:'EFS', cat:'maintenance', startMonth:11, startDay:1, endMonth:12, endDay:31 },
@@ -520,23 +518,24 @@ const TASKS = [
   { num:'21', desc:'Update Template – Locally Supplied Excel Sheet', owner:'Support', cat:'kickoff', startMonth:1, startDay:1, endMonth:1, endDay:15 },
   { num:'22', desc:'Load from HuB spreadsheet with all venues, first event date, last event, and 1 week after last event', owner:'Support', cat:'kickoff', startMonth:1, startDay:1, endMonth:1, endDay:15 },
   { num:'23', desc:'Compile Suggested updates to CO-160a, CO-160, CO-162', owner:'US Regional Convention Team', cat:'coordination', startMonth:9, startDay:1, endMonth:9, endDay:30 },
+  { num:'78', desc:'Review: Confirm Equipment lists show Generic Video walls', owner:'Support · Zone Contacts & Assistants', cat:'designreview', startMonth:4, startDay:15, endMonth:4, endDay:30 },
   { num:'29', desc:'Markup minor designs with PDF editor', owner:'Zone Contacts & Assistants', cat:'design', startMonth:12, startDay:15, endMonth:3, endDay:1 },
   { num:'30', desc:'Add Equipment to Hub Design Card for initial review', owner:'Zone Contacts & Assistants', cat:'design', startMonth:12, startDay:15, endMonth:2, endDay:15 },
   { num:'31', desc:'Send First Redlines to Documentation Team', owner:'Zone Contacts & Assistants · Documentation Team', cat:'design', startMonth:12, startDay:1, endMonth:1, endDay:15 },
   { num:'76', desc:'Send Second Redlines to Documentation Team', owner:'Zone Contacts & Assistants · Documentation Team', cat:'design', startMonth:2, startDay:15, endMonth:3, endDay:1 },
-  { num:'32', desc:'Send Design to AV Design Reviewer', owner:'Zone Contacts & Assistants · AV Reviewer', cat:'design', startMonth:2, startDay:1, endMonth:3, endDay:1 },
-  { num:'33', desc:'Update the Locally Supplied Excel Sheet for each Venue', owner:'Zone Contacts & Assistants', cat:'design', startMonth:2, startDay:1, endMonth:3, endDay:1 },
-  { num:'34', desc:'Bi-weekly Coordination Meeting with Convention Equipment Crew', owner:'Zone Contacts & Assistants', cat:'coordination', startMonth:2, startDay:1, endMonth:3, endDay:1 },
-  { num:'35', desc:'Weekly Meetings with Documentation & EFS', owner:'Zone Contacts & Assistants', cat:'coordination', startMonth:2, startDay:21, endMonth:3, endDay:1 },
-  { num:'36', desc:'Copy DSP scene file to "Final" Folder for JW Drive upload', owner:'Zone Contacts & Assistants', cat:'designreview', startMonth:2, startDay:21, endMonth:3, endDay:1 },
+  { num:'32', desc:'Send Design to AV Design Reviewer (Appendix R)', owner:'Zone Contacts & Assistants · AV Reviewer', cat:'design', startMonth:2, startDay:1, endMonth:3, endDay:1 },
+  { num:'33', desc:'Update the Locally Supplied Excel Sheet for each Venue', owner:'Zone Contacts & Assistants · Support', cat:'design', startMonth:2, startDay:1, endMonth:3, endDay:1 },
+  { num:'35', desc:'Convention Roadmap Meetings', owner:'US Regional Convention Team', cat:'coordination', startMonth:8, startDay:1, endMonth:8, endDay:31 },
+  { num:'36', desc:'Copy DSP scene file to "Final" Folder for JW Drive upload (Appendix Q)', owner:'Zone Contacts & Assistants', cat:'designreview', startMonth:2, startDay:21, endMonth:3, endDay:1 },
   { num:'38', desc:'Provide feedback for Streamed Meeting (Program Overseers & AV Depts)', owner:'US Regional Convention Team', cat:'design', startMonth:3, startDay:1, endMonth:3, endDay:1 },
-  { num:'39', desc:'Finalize AV Design Cards', owner:'Zone Contacts & Assistants', cat:'design', startMonth:2, startDay:1, endMonth:3, endDay:15 },
+  { num:'39', desc:'Finalize AV Design Cards (Appendix A)', owner:'Zone Contacts & Assistants', cat:'design', startMonth:2, startDay:1, endMonth:3, endDay:15 },
   { num:'40', desc:'All Convention Designs marked Approved in Hub', owner:'US Regional Convention Team', cat:'design', startMonth:3, startDay:15, endMonth:3, endDay:20 },
-  { num:'20', desc:'Site Visits and Evaluations for New Venues', owner:'Zone Contacts & Assistants', cat:'newsites', startMonth:12, startDay:1, endMonth:1, endDay:1 },
+  { num:'20', desc:'Site Visits and Evaluations for New Venues (Appendix D)', owner:'Zone Contacts & Assistants', cat:'newsites', startMonth:11, startDay:1, endMonth:1, endDay:15 },
+  { num:'79', desc:'Schedule new site & evaluation visits', owner:'Zone Contacts & Assistants', cat:'newsites', startMonth:10, startDay:1, endMonth:10, endDay:31 },
 
   // TRAINING
   { num:'19', desc:'Yearly Training at Tuxedo – Convention Equipment and Design (1 week)', owner:'Zone Contacts & Assistants · Helpdesk Team', cat:'training', startMonth:12, startDay:1, endMonth:12, endDay:15 },
-  { num:'43', desc:'Zone Contacts & Assistants to meet with first Program Overseer for each New Venue', owner:'Zone Contacts & Assistants', cat:'kickoff', startMonth:4, startDay:1, endMonth:4, endDay:15 },
+  { num:'43', desc:'Zone Contacts & Assistants to meet with first Program Overseer for each New Venue (Appendix C)', owner:'Zone Contacts & Assistants', cat:'kickoff', startMonth:4, startDay:1, endMonth:4, endDay:15 },
   { num:'44', desc:'Convention Streamed Meeting with Program Overseers & AV Departments', owner:'AVD Oversight', cat:'events', startMonth:4, startDay:1, endMonth:4, endDay:15 },
   { num:'45', desc:'Kick off Meeting for Help Desk Support', owner:'US Regional Convention Team', cat:'events', startMonth:4, startDay:15, endMonth:5, endDay:1 },
   { num:'46', desc:'Individual Training on Helpdesk Team process (Call Log, Calls, Teams)', owner:'Helpdesk Team', cat:'helpdesk', startMonth:4, startDay:15, endMonth:5, endDay:1 },
@@ -547,7 +546,7 @@ const TASKS = [
 
   // UPLOAD
   { num:'41', desc:'Notify Service Dept which videos/files need to be posted on JWHub', owner:'US Regional Convention Team · EFS', cat:'design', startMonth:4, startDay:1, endMonth:4, endDay:5 },
-  { num:'42', desc:'Upload designs and configs from Final Folders to JWDrive', owner:'Documentation Team', cat:'design', startMonth:4, startDay:1, endMonth:4, endDay:5 },
+  { num:'42', desc:'Upload designs and configs from Final Folders to JWDrive (Appendix P)', owner:'Documentation Team', cat:'design', startMonth:4, startDay:1, endMonth:4, endDay:5 },
 
   // BUDGET
   { num:'51', desc:'Convention Equipment Upgrade Finalized (Research and Pricing)', owner:'EFS', cat:'budget', startMonth:5, startDay:1, endMonth:5, endDay:31 },
@@ -576,7 +575,7 @@ const CAT_COLORS = {
 };
 
 const CAT_LABELS = {
-  helpdesk:'Convention Support & Helpdesk', closeout:'Service Year Closeout', planning:'Planning Events Next Service Year',
+  helpdesk:'Convention Support & Helpdesk', closeout:'Service Year Closeout', planning:'Planning',
   maintenance:'Equipment Repair Maintenance Firmware Updates', orders:'Equipment Orders', design:'Design',
   training:'US Regional Convention Team Training', upload:'Upload', budget:'Budget', events:'Events', sitetraining:'Convention Site Training', kickoff:'Service Year Kick Off', zonecloseout:'Zone Close Out', designreview:'Design Review & Config Completion', coordination:'Coordination', newsites:'New Convention Sites or Major Design Changes',
 };
@@ -707,7 +706,7 @@ function buildGantt() {
   // Sort each section's tasks by start date relative to current month
   Object.keys(groups).forEach(cat => groups[cat].sort(sortByServiceYearStart));
 
-  const catOrder = ['planning','kickoff','maintenance','orders','newsites','design','designreview','helpdesk','zonecloseout','closeout','coordination','training','sitetraining','upload','budget','events'];
+  const catOrder = CAT_ORDER;
   catOrder.forEach(cat => {
     if (!groups[cat]) return;
     // Group header row
@@ -727,10 +726,10 @@ function buildGantt() {
       tr.dataset.groups = parseGroups(task.owner).join('|');
       if (isPastTask(task)) tr.classList.add('is-past');
 
-      // Label cell
+      // Label cell — sequential top-to-bottom number (stable across all tabs)
       const labelTd = document.createElement('td');
       labelTd.className = 'row-label';
-      labelTd.innerHTML = `<strong>#${task.num}</strong> ${task.desc}<br><small style="color:var(--gray-mid)">${task.owner}</small>`;
+      labelTd.innerHTML = `<strong>${task.seq}.</strong> ${task.desc}<br><small style="color:var(--gray-mid)">${task.owner}</small>`;
       tr.appendChild(labelTd);
 
       // 12 month cells in current-month-first order
@@ -761,11 +760,11 @@ function buildGantt() {
           const rightPct = ((cellDays - barEndInCell) / cellDays) * 100;
           bar.style.left  = leftPct + '%';
           bar.style.right = rightPct + '%';
-          bar.title = `#${task.num} · ${task.desc} · ${task.owner}`;
+          bar.title = `${task.seq}. ${task.desc} · ${task.owner}`;
 
           // Show label text only in the first visible column of the bar
           if (m === task.startMonth) {
-            bar.innerHTML = `<span class="task-num-g">#${task.num}</span><span style="overflow:hidden;text-overflow:ellipsis">${task.desc}</span>`;
+            bar.innerHTML = `<span class="task-num-g">${task.seq}</span><span style="overflow:hidden;text-overflow:ellipsis">${task.desc}</span>`;
           }
           td.appendChild(bar);
         }
@@ -816,7 +815,7 @@ function buildCalendar() {
         const dateStr = t.startMonth === t.endMonth
           ? `${MONTHS[t.startMonth-1].slice(0,3)} ${t.startDay} – ${t.endDay}`
           : `${MONTHS[t.startMonth-1].slice(0,3)} ${t.startDay} – ${MONTHS[t.endMonth-1].slice(0,3)} ${t.endDay}`;
-        el.innerHTML = `<span class="ct-num">#${t.num}</span>${t.desc}<span class="ct-dates">📅 ${dateStr}</span><span class="ct-owner">${t.owner}</span>`;
+        el.innerHTML = `<span class="ct-num">${t.seq}.</span>${t.desc}<span class="ct-dates">📅 ${dateStr}</span><span class="ct-owner">${t.owner}</span>`;
         tasksDiv.appendChild(el);
       });
     }
@@ -899,7 +898,7 @@ function buildTimeline() {
           return `<span class="tl-tag owner-group" style="background:${c};">${g}</span>`;
         }).join('');
         el.innerHTML = `
-          <span class="tl-task-num">#${t.num}</span>
+          <span class="tl-task-num">${t.seq}</span>
           <div class="tl-task-body">
             <div class="tl-task-desc">${t.desc}</div>
             <div class="tl-task-meta">
@@ -1077,7 +1076,21 @@ function toggleProgress() {
   btn.querySelector('.pt-label').textContent = 'Service Year Progress Filter: ' + (progressOn ? 'On' : 'Off');
 }
 
+// ── Assign a stable sequential number (matching Gantt top-to-bottom order) to every task ──
+const CAT_ORDER = ['planning','kickoff','maintenance','orders','newsites','design','designreview','helpdesk','zonecloseout','closeout','coordination','training','sitetraining','upload','budget','events'];
+function assignSeq() {
+  const groups = {};
+  TASKS.forEach(t => { (groups[t.cat] = groups[t.cat] || []).push(t); });
+  Object.keys(groups).forEach(cat => groups[cat].sort(sortByServiceYearStart));
+  let n = 0;
+  CAT_ORDER.forEach(cat => {
+    if (!groups[cat]) return;
+    groups[cat].forEach(t => { t.seq = ++n; });
+  });
+}
+
 // Init all 3
+assignSeq();
 buildGantt();
 buildCalendar();
 buildTimeline();
