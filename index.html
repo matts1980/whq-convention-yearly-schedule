@@ -400,8 +400,111 @@ body.progress-on .gantt-row.is-past td.row-label { font-style: italic; color: va
 .leg-clear.show { display: inline-block; }
 .leg-clear:hover { background: #dde6ff; }
 
+/* ══════════════════════════════════════
+   VIEW 0 — ONGOING PROJECTS DASHBOARD
+══════════════════════════════════════ */
+.dash-updated {
+  font-size: 12px;
+  color: var(--text-mid);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.dash-updated .dot-live {
+  width: 9px; height: 9px; border-radius: 50%;
+  background: #1f9d55; box-shadow: 0 0 0 3px rgba(31,157,85,0.18);
+}
+
+/* KPI summary cards */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 8px;
+}
+.kpi {
+  background: var(--white);
+  border: 1px solid var(--gray-soft);
+  border-radius: 10px;
+  padding: 16px 18px;
+  position: relative;
+  overflow: hidden;
+}
+.kpi::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+  background: var(--gray-mid);
+}
+.kpi.inprogress::before { background: #1f9d55; }
+.kpi.upcoming::before   { background: var(--blue-light); }
+.kpi.completed::before  { background: var(--gray-mid); }
+.kpi.total::before      { background: var(--gold); }
+.kpi-num { font-size: 30px; font-weight: 800; color: var(--navy); line-height: 1; }
+.kpi-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-mid); margin-top: 6px; font-weight: 600; }
+
+.dash-section-title {
+  font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;
+  color: var(--navy); margin: 30px 0 14px; display: flex; align-items: center; gap: 10px;
+}
+.dash-section-title .count-pill {
+  font-size: 11px; background: var(--navy); color: var(--gold);
+  border-radius: 20px; padding: 2px 10px; font-weight: 700;
+}
+
+/* Ongoing project cards */
+.ongoing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  gap: 14px;
+}
+.ongoing-card {
+  background: var(--white);
+  border: 1px solid var(--gray-soft);
+  border-radius: 10px;
+  padding: 14px 16px;
+  border-top: 4px solid var(--blue);
+  display: flex; flex-direction: column; gap: 8px;
+}
+.oc-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+.oc-num { font-size: 11px; font-weight: 700; color: #fff; background: var(--navy); border-radius: 4px; padding: 2px 7px; flex-shrink: 0; }
+.oc-status { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 2px 9px; border-radius: 20px; white-space: nowrap; }
+.oc-status.inprogress { background: #e4f6ec; color: #1f7a3d; border: 1px solid #a8e0be; }
+.oc-status.upcoming   { background: #eef2ff; color: var(--blue); border: 1px solid #c8d4f8; }
+.oc-desc { font-size: 13px; font-weight: 600; color: var(--text-dark); line-height: 1.35; }
+.oc-meta { display: flex; flex-wrap: wrap; gap: 5px; }
+.oc-tag { font-size: 10px; padding: 1px 8px; border-radius: 20px; font-weight: 500; }
+.oc-tag.cat { color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.4); }
+.oc-tag.owner { color: #fff; font-weight: 600; text-shadow: 0 1px 2px rgba(0,0,0,0.4); }
+.oc-tag.dates { background: #f0f8f0; color: #3a6a3a; border: 1px solid #b0d8b0; }
+.oc-prog { margin-top: 4px; }
+.oc-prog-track { height: 8px; background: #ececec; border-radius: 4px; overflow: hidden; }
+.oc-prog-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, #1f9d55, #37c46e); }
+.oc-prog-fill.soon { background: linear-gradient(90deg, var(--blue), var(--blue-light)); }
+.oc-prog-labels { display: flex; justify-content: space-between; font-size: 10px; margin-top: 5px; font-weight: 600; color: var(--text-mid); }
+.oc-days { color: var(--c-closeout); }
+.oc-days.soon { color: var(--blue); }
+
+/* Workstream rollup */
+.ws-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 12px;
+}
+.ws-card { background: var(--white); border: 1px solid var(--gray-soft); border-radius: 8px; padding: 12px 14px; }
+.ws-head { display: flex; align-items: center; gap: 8px; margin-bottom: 9px; }
+.ws-dot { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
+.ws-name { font-size: 12px; font-weight: 700; color: var(--text-dark); line-height: 1.25; }
+.ws-bar { height: 8px; background: #ececec; border-radius: 4px; overflow: hidden; display: flex; }
+.ws-seg-done { background: var(--gray-mid); }
+.ws-seg-now  { background: #1f9d55; }
+.ws-seg-next { background: var(--blue-light); }
+.ws-legend { display: flex; flex-wrap: wrap; gap: 12px; font-size: 10px; color: var(--text-mid); margin-top: 8px; }
+.ws-legend span b { color: var(--text-dark); }
+.dash-empty { color: var(--gray-mid); font-style: italic; padding: 14px; background: var(--white); border: 1px dashed var(--gray-soft); border-radius: 8px; }
+
 @media (max-width: 800px) {
   .cal-grid { grid-template-columns: repeat(2,1fr); }
+  .kpi-row { grid-template-columns: repeat(2,1fr); }
   header { padding: 16px 16px 0; }
   .view { padding: 16px 12px 40px; }
   .tab-btn { padding: 8px 12px; font-size: 11px; }
@@ -415,7 +518,8 @@ body.progress-on .gantt-row.is-past td.row-label { font-style: italic; color: va
   <h1>Yearly Schedule — All Views</h1>
   <p>Choose a view format below · Full task detail with owner tags and dates</p>
   <div class="tabs">
-    <button class="tab-btn active" onclick="switchTab('gantt',this)">① Gantt Bar Chart</button>
+    <button class="tab-btn active" onclick="switchTab('dashboard',this)">◆ Ongoing Dashboard</button>
+    <button class="tab-btn" onclick="switchTab('gantt',this)">① Gantt Bar Chart</button>
     <button class="tab-btn" onclick="switchTab('calendar',this)">② Monthly Calendar Grid</button>
     <button class="tab-btn" onclick="switchTab('timeline',this)">③ Phase Timeline</button>
     <button class="progress-toggle" id="progressToggle" onclick="toggleProgress()">
@@ -425,9 +529,31 @@ body.progress-on .gantt-row.is-past td.row-label { font-style: italic; color: va
 </header>
 
 <!-- ══════════════════════════════════════════════════════════
+     VIEW 0 — ONGOING PROJECTS DASHBOARD
+══════════════════════════════════════════════════════════ -->
+<div class="view active" id="view-dashboard">
+  <div class="dash-updated" id="dashUpdated"></div>
+
+  <div class="kpi-row" id="kpiRow"></div>
+
+  <div class="dash-section-title">
+    Ongoing Now <span class="count-pill" id="ongoingCount">0</span>
+  </div>
+  <div class="ongoing-grid" id="ongoingGrid"></div>
+
+  <div class="dash-section-title">
+    Starting Soon <span class="count-pill" id="soonCount">0</span>
+  </div>
+  <div class="ongoing-grid" id="soonGrid"></div>
+
+  <div class="dash-section-title">Workstream Status</div>
+  <div class="ws-grid" id="wsGrid"></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
      VIEW 1 — GANTT
 ══════════════════════════════════════════════════════════ -->
-<div class="view active" id="view-gantt">
+<div class="view" id="view-gantt">
 
   <div class="legend-bar" id="legend-gantt" data-note="Bar color = assigned group (split bars = shared between groups). Click a group to filter."></div>
 
@@ -679,6 +805,181 @@ function isPastTask(t) {
   }
   // A task is past only if its placed end date is before today (and within this season).
   return endDate >= seasonStart && endDate < today;
+}
+
+// ── Real-date status of a task on the current service-year timeline ──
+// Returns { status: 'inprogress'|'upcoming'|'completed', pct, daysLeft, daysUntil }.
+// Reuses the same Aug-15 season placement as isPastTask so summer tasks that
+// straddle the service-year boundary are handled consistently.
+const MS_DAY = 86400000;
+function taskStatus(t) {
+  const yr = NOW.getFullYear();
+  const today = new Date(yr, CUR_MONTH - 1, CUR_DAY, 0, 0, 0);
+
+  let resetYear = yr;
+  const thisYearReset = new Date(yr, SY_BOUNDARY_MONTH - 1, SY_BOUNDARY_DAY, 0, 0, 0);
+  if (today < thisYearReset) resetYear = yr - 1;
+  const seasonStart = new Date(resetYear, SY_BOUNDARY_MONTH - 1, SY_BOUNDARY_DAY, 0, 0, 0);
+
+  // End-date placement (identical rules to isPastTask).
+  let endYearForTask = resetYear;
+  if (t.endMonth === SY_BOUNDARY_MONTH && t.endDay >= SY_BOUNDARY_DAY) endYearForTask = resetYear + 1;
+  let endDate = new Date(endYearForTask, t.endMonth - 1, t.endDay, 23, 59, 59);
+  if (endDate < seasonStart) endDate = new Date(endYearForTask + 1, t.endMonth - 1, t.endDay, 23, 59, 59);
+
+  // Start-date placement: same calendar year as the end, backed off a year if it
+  // would otherwise land after the end (task spans a year boundary, e.g. Dec–Mar).
+  let startYear = endDate.getFullYear();
+  let startDate = new Date(startYear, t.startMonth - 1, t.startDay, 0, 0, 0);
+  if (startDate > endDate) startDate = new Date(startYear - 1, t.startMonth - 1, t.startDay, 0, 0, 0);
+
+  if (today < startDate) {
+    return { status: 'upcoming', pct: 0, daysLeft: null,
+             daysUntil: Math.ceil((startDate - today) / MS_DAY), startDate, endDate };
+  }
+  if (today > endDate) {
+    return { status: 'completed', pct: 100, daysLeft: null, daysUntil: null, startDate, endDate };
+  }
+  const span = endDate - startDate;
+  let pct = span > 0 ? Math.round(((today - startDate) / span) * 100) : 50;
+  pct = Math.max(0, Math.min(100, pct));
+  return { status: 'inprogress', pct,
+           daysLeft: Math.max(0, Math.ceil((endDate - today) / MS_DAY)),
+           daysUntil: null, startDate, endDate };
+}
+
+function fmtDateRange(t) {
+  return t.startMonth === t.endMonth
+    ? `${MONTHS[t.startMonth-1].slice(0,3)} ${t.startDay} – ${t.endDay}`
+    : `${MONTHS[t.startMonth-1].slice(0,3)} ${t.startDay} – ${MONTHS[t.endMonth-1].slice(0,3)} ${t.endDay}`;
+}
+
+function ownerBubblesHTML(owner) {
+  return parseGroups(owner).map(g => {
+    const c = GROUP_COLORS[g] || 'var(--gray-mid)';
+    return `<span class="oc-tag owner" style="background:${c};">${g}</span>`;
+  }).join('');
+}
+
+// ═══════════════════════════════════
+// BUILD DASHBOARD (Ongoing Projects)
+// ═══════════════════════════════════
+function buildDashboard() {
+  // Compute status for every task once.
+  const enriched = TASKS.map(t => ({ t, s: taskStatus(t) }));
+  const inProgress = enriched.filter(e => e.s.status === 'inprogress');
+  const upcoming   = enriched.filter(e => e.s.status === 'upcoming');
+  const completed  = enriched.filter(e => e.s.status === 'completed');
+
+  // ── Last-updated line ──
+  const todayStr = `${MONTHS[CUR_MONTH-1]} ${CUR_DAY}, ${NOW.getFullYear()}`;
+  document.getElementById('dashUpdated').innerHTML =
+    `<span class="dot-live"></span> Live status as of <strong style="margin-left:2px">${todayStr}</strong>`;
+
+  // ── KPI cards ──
+  const kpis = [
+    { cls: 'inprogress', num: inProgress.length, label: 'In Progress' },
+    { cls: 'upcoming',   num: upcoming.length,   label: 'Upcoming' },
+    { cls: 'completed',  num: completed.length,  label: 'Completed' },
+    { cls: 'total',      num: TASKS.length,      label: 'Total Projects' },
+  ];
+  document.getElementById('kpiRow').innerHTML = kpis.map(k =>
+    `<div class="kpi ${k.cls}"><div class="kpi-num">${k.num}</div><div class="kpi-label">${k.label}</div></div>`
+  ).join('');
+
+  // ── Ongoing Now (sorted by fewest days remaining) ──
+  inProgress.sort((a, b) => a.s.daysLeft - b.s.daysLeft);
+  document.getElementById('ongoingCount').textContent = inProgress.length;
+  const ongoingGrid = document.getElementById('ongoingGrid');
+  if (inProgress.length === 0) {
+    ongoingGrid.innerHTML = '<div class="dash-empty">No projects are currently in progress.</div>';
+  } else {
+    ongoingGrid.innerHTML = inProgress.map(({ t, s }) => {
+      const daysTxt = s.daysLeft === 0 ? 'Ends today' : `${s.daysLeft} day${s.daysLeft === 1 ? '' : 's'} left`;
+      return `
+        <div class="ongoing-card" style="border-top-color:${CAT_COLORS[t.cat]}">
+          <div class="oc-top">
+            <span class="oc-num">${t.seq}</span>
+            <span class="oc-status inprogress">In Progress</span>
+          </div>
+          <div class="oc-desc">${t.desc}</div>
+          <div class="oc-meta">
+            <span class="oc-tag cat" style="background:${CAT_COLORS[t.cat]}">${CAT_LABELS[t.cat]}</span>
+            ${ownerBubblesHTML(t.owner)}
+            <span class="oc-tag dates">📅 ${fmtDateRange(t)}</span>
+          </div>
+          <div class="oc-prog">
+            <div class="oc-prog-track"><div class="oc-prog-fill" style="width:${s.pct}%"></div></div>
+            <div class="oc-prog-labels"><span>${s.pct}% complete</span><span class="oc-days">${daysTxt}</span></div>
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  // ── Starting Soon (upcoming within 45 days, soonest first) ──
+  const soon = upcoming.filter(e => e.s.daysUntil <= 45).sort((a, b) => a.s.daysUntil - b.s.daysUntil);
+  document.getElementById('soonCount').textContent = soon.length;
+  const soonGrid = document.getElementById('soonGrid');
+  if (soon.length === 0) {
+    soonGrid.innerHTML = '<div class="dash-empty">Nothing new starts in the next 45 days.</div>';
+  } else {
+    soonGrid.innerHTML = soon.map(({ t, s }) => {
+      const daysTxt = s.daysUntil === 0 ? 'Starts today'
+        : `Starts in ${s.daysUntil} day${s.daysUntil === 1 ? '' : 's'}`;
+      return `
+        <div class="ongoing-card" style="border-top-color:${CAT_COLORS[t.cat]}">
+          <div class="oc-top">
+            <span class="oc-num">${t.seq}</span>
+            <span class="oc-status upcoming">Upcoming</span>
+          </div>
+          <div class="oc-desc">${t.desc}</div>
+          <div class="oc-meta">
+            <span class="oc-tag cat" style="background:${CAT_COLORS[t.cat]}">${CAT_LABELS[t.cat]}</span>
+            ${ownerBubblesHTML(t.owner)}
+            <span class="oc-tag dates">📅 ${fmtDateRange(t)}</span>
+          </div>
+          <div class="oc-prog">
+            <div class="oc-prog-track"><div class="oc-prog-fill soon" style="width:6%"></div></div>
+            <div class="oc-prog-labels"><span>Not started</span><span class="oc-days soon">${daysTxt}</span></div>
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  // ── Workstream (category) rollup ──
+  const wsGrid = document.getElementById('wsGrid');
+  const byCat = {};
+  enriched.forEach(e => {
+    const c = e.t.cat;
+    (byCat[c] = byCat[c] || { done: 0, now: 0, next: 0, total: 0 });
+    byCat[c].total++;
+    if (e.s.status === 'completed') byCat[c].done++;
+    else if (e.s.status === 'inprogress') byCat[c].now++;
+    else byCat[c].next++;
+  });
+  wsGrid.innerHTML = CAT_ORDER.filter(c => byCat[c]).map(c => {
+    const d = byCat[c];
+    const pctDone = (d.done / d.total) * 100;
+    const pctNow  = (d.now  / d.total) * 100;
+    const pctNext = (d.next / d.total) * 100;
+    return `
+      <div class="ws-card">
+        <div class="ws-head">
+          <span class="ws-dot" style="background:${CAT_COLORS[c]}"></span>
+          <span class="ws-name">${CAT_LABELS[c]}</span>
+        </div>
+        <div class="ws-bar">
+          <div class="ws-seg-done" style="width:${pctDone}%"></div>
+          <div class="ws-seg-now"  style="width:${pctNow}%"></div>
+          <div class="ws-seg-next" style="width:${pctNext}%"></div>
+        </div>
+        <div class="ws-legend">
+          <span><b>${d.now}</b> ongoing</span>
+          <span><b>${d.next}</b> upcoming</span>
+          <span><b>${d.done}</b> done</span>
+        </div>
+      </div>`;
+  }).join('');
 }
 
 // ═══════════════════════════════════
@@ -1089,8 +1390,9 @@ function assignSeq() {
   });
 }
 
-// Init all 3
+// Init all views
 assignSeq();
+buildDashboard();
 buildGantt();
 buildCalendar();
 buildTimeline();
