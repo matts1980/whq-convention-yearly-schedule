@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WHQ Broadcasting – US Convention Yearly Schedule</title>
+<style>
+:root {
+  --navy: #1a2744;
+  --navy-mid: #243360;
+  --blue: #2d5be3;
+  --blue-light: #4a7af5;
+  --gold: #c8a84b;
+  --gold-light: #e0c170;
+  --cream: #f7f5f0;
+  --white: #ffffff;
+  --gray-soft: #e8e6e0;
+  --gray-mid: #9a98a0;
+  --text-dark: #1a1a2e;
+  --text-mid: #3d3b50;
+
+  --c-helpdesk:   #4a7af5;
+  --c-closeout:   #e07070;
+  --c-planning:   #7e9e5f;
+  --c-maintenance:#b07bd4;
+  --c-orders:     #e09040;
+  --c-design:     #2d5be3;
+  --c-training:   #40b0c8;
+  --c-upload:     #6080d4;
+  --c-budget:     #c8a84b;
+  --c-events:     #2f9e8f;
+  --c-sitetraining: #c85a8f;
+  --c-kickoff:    #4a6fa5;
+  --c-zonecloseout: #a55a3c;
+  --c-designreview: #5a7d9e;
+  --c-coordination: #b5852a;
+  --c-newsites:   #3c7a6a;
+
+  /* Group / assignment colors (used for Gantt bars) */
+  --g-avcontacts:   #2d8c6f;
+  --g-avdc:         #3a4a7a;
+  --g-avdesign:     #c8762d;
+  --g-avreviewer:   #7e9e5f;
+  --g-avdoversight: #5db8e8;
+  --g-efs:          #8a5a2b;
+  --g-office:       #8a6cae;
+  --g-tms:          #d4607a;
+  --g-usrct:        #3a4a7a;
+  --g-helpdesk:     #e08a30;
+  --g-support:      #b07bd4;
+  --g-trainers:     #1aa39a;
+  --g-documentation: #6b7280;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--cream); color: var(--text-dark); }
+
+/* ── Header ── */
+header {
+  background: var(--navy);
+  color: var(--white);
+  padding: 24px 40px 0;
+  border-bottom: 3px solid var(--gold);
+}
+header .eyebrow { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold-light); margin-bottom: 6px; }
+header h1 { font-size: 22px; font-weight: 700; }
+header p { font-size: 12px; color: #a8b4cc; margin-top: 4px; margin-bottom: 16px; }
+
+/* ── Tab bar ── */
+.tabs { display: flex; gap: 4px; margin-top: 12px; }
+.tab-btn {
+  padding: 10px 22px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #a8b4cc;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  letter-spacing: 0.2px;
+  transition: all 0.15s;
+}
+.tab-btn:hover { color: var(--white); }
+.tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+/* Progress Filter toggle */
+.progress-toggle {
+  margin-left: auto;
+  align-self: center;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #c0cce8;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.15s;
+  margin-bottom: 8px;
+}
+.progress-toggle:hover { background: rgba(255,255,255,0.14); color: var(--white); }
+.progress-toggle .pt-dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--gray-mid);
+  border: 2px solid rgba(255,255,255,0.3);
+  transition: all 0.15s;
+}
+.progress-toggle.on {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--navy);
+}
+.progress-toggle.on .pt-dot { background: #1f7a3d; border-color: var(--navy); }
+
+/* ── Views ── */
+.view { display: none; padding: 28px 32px 60px; }
+.view.active { display: block; }
+
+/* ══════════════════════════════════════
+   VIEW 1 — GANTT
+══════════════════════════════════════ */
+.gantt-wrap { overflow-x: auto; }
+.gantt-table { border-collapse: collapse; min-width: 1100px; width: 100%; }
+.gantt-table th {
+  background: var(--navy);
+  color: var(--gold);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 8px 4px;
+  border: 1px solid var(--navy-mid);
+  white-space: nowrap;
+}
+.gantt-table th.label-col { text-align: left; padding-left: 10px; width: 240px; min-width: 240px; }
+.gantt-month { width: calc((100% - 240px) / 12); }
+
+.gantt-group td {
+  background: var(--navy-mid);
+  color: var(--gold-light);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 6px 10px;
+  border: 1px solid #1a2744;
+}
+.gantt-row td {
+  border: 1px solid var(--gray-soft);
+  padding: 0;
+  height: 38px;
+  vertical-align: middle;
+  background: var(--white);
+}
+.gantt-row td.row-label {
+  padding: 6px 10px;
+  font-size: 11.5px;
+  color: var(--text-dark);
+  white-space: normal;
+  line-height: 1.3;
+  background: #f9f8f5;
+  border-right: 2px solid var(--gray-soft);
+}
+.gantt-row:hover td { background: #f0f4ff; }
+.gantt-row:hover td.row-label { background: #e8eeff; }
+.gantt-cell { position: relative; }
+
+/* Current-month column highlight */
+.gantt-table th.current-month { background: var(--gold); color: var(--navy); }
+.gantt-cell.current-month { background: rgba(200,168,75,0.10); }
+.gantt-row:hover td.current-month { background: rgba(200,168,75,0.18); }
+
+/* Past task dimming — only active when Progress Filter is ON */
+body.progress-on .is-past { opacity: 0.4; }
+body.progress-on .gantt-row.is-past td.row-label { font-style: italic; color: var(--gray-mid); }
+
+/* Calendar current-month highlight */
+.cal-month.current-month { box-shadow: 0 0 0 2px var(--gold); }
+.cal-month.current-month .cal-month-header { background: var(--gold); color: var(--navy); }
+/* Timeline current-month highlight */
+.tl-month-band.current-month .tl-month-name { color: var(--gold); }
+.tl-month-band.current-month .tl-month-dot { background: var(--gold); border-color: var(--navy); }
+.tl-month-band.current-month .tl-month-name::after { content: ' • TODAY'; font-size: 10px; color: var(--navy); background: var(--gold); padding: 1px 6px; border-radius: 10px; margin-left: 6px; }
+.gantt-bar {
+  position: absolute;
+  top: 6px; bottom: 6px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  padding: 0 5px;
+  font-size: 9.5px;
+  font-weight: 600;
+  color: var(--white);
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: default;
+  transition: opacity 0.15s;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.55);
+}
+.gantt-bar:hover { opacity: 0.85; }
+.gantt-owner-tag {
+  display: inline-block;
+  background: rgba(0,0,0,0.2);
+  border-radius: 2px;
+  padding: 1px 4px;
+  font-size: 8.5px;
+  margin-left: 4px;
+}
+.task-num-g {
+  display: inline-block;
+  background: rgba(0,0,0,0.25);
+  border-radius: 2px;
+  padding: 1px 4px;
+  font-size: 9px;
+  margin-right: 4px;
+}
+
+/* ══════════════════════════════════════
+   VIEW 2 — MONTHLY CALENDAR GRID
+══════════════════════════════════════ */
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+.cal-month {
+  background: var(--white);
+  border: 1px solid var(--gray-soft);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.cal-month-header {
+  background: var(--navy);
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 10px 14px;
+}
+.cal-tasks { padding: 10px; display: flex; flex-direction: column; gap: 5px; min-height: 60px; }
+.cal-task {
+  border-radius: 4px;
+  padding: 5px 8px;
+  font-size: 11px;
+  color: var(--white);
+  line-height: 1.35;
+}
+.cal-task .ct-num { font-weight: 700; opacity: 0.85; margin-right: 3px; }
+.cal-task .ct-owner { display: block; font-size: 9.5px; opacity: 0.8; margin-top: 2px; }
+.cal-task .ct-dates { display: block; font-size: 9.5px; opacity: 0.9; margin-top: 2px; font-weight: 600; }
+.cal-empty { color: var(--gray-mid); font-size: 11px; font-style: italic; padding: 10px; }
+
+/* ══════════════════════════════════════
+   VIEW 3 — PHASE TIMELINE
+══════════════════════════════════════ */
+.timeline-wrap { position: relative; padding-left: 40px; }
+.timeline-spine {
+  position: absolute;
+  left: 16px; top: 0; bottom: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, var(--navy), var(--blue-light));
+  border-radius: 2px;
+}
+.tl-month-band { margin-bottom: 0; }
+.tl-month-label {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  margin-top: 24px;
+}
+.tl-month-dot {
+  position: absolute;
+  left: -32px;
+  width: 18px; height: 18px;
+  background: var(--navy);
+  border: 3px solid var(--gold);
+  border-radius: 50%;
+}
+.tl-month-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.tl-month-line {
+  flex: 1;
+  height: 1px;
+  background: var(--gray-soft);
+}
+.tl-tasks { display: flex; flex-direction: column; gap: 7px; margin-bottom: 4px; }
+.tl-task {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: var(--white);
+  border: 1px solid var(--gray-soft);
+  border-radius: 6px;
+  padding: 9px 12px;
+  border-left: 4px solid var(--blue-light);
+}
+.tl-task-num {
+  font-size: 10px; font-weight: 700;
+  color: var(--white);
+  background: var(--navy);
+  border-radius: 3px;
+  padding: 2px 6px;
+  white-space: nowrap;
+  margin-top: 1px;
+  flex-shrink: 0;
+}
+.tl-task-body { flex: 1; }
+.tl-task-desc { font-size: 12.5px; font-weight: 600; color: var(--text-dark); line-height: 1.35; }
+.tl-task-meta { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 5px; }
+.tl-tag {
+  font-size: 10px; padding: 1px 7px; border-radius: 20px; font-weight: 500;
+}
+.tl-tag.owner { background: #eef2ff; color: var(--blue); border: 1px solid #c8d4f8; }
+.tl-tag.cat { background: #fdf6e8; color: #8a6010; border: 1px solid #e8d8a0; }
+.tl-tag.dates { background: #f0f8f0; color: #3a6a3a; border: 1px solid #b0d8b0; }
+.tl-tag.dur { background: #eef0f5; color: var(--navy); border: 1px solid #c4cbdc; font-weight: 700; }
+.tl-tag.owner-group {
+  color: #fff;
+  border: none;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.45);
+}
+
+/* Timeline duration bar (mini 12-month track) */
+.tl-dur-track {
+  position: relative;
+  height: 8px;
+  background: #ececec;
+  border-radius: 4px;
+  margin-top: 8px;
+  overflow: hidden;
+}
+.tl-dur-fill {
+  position: absolute;
+  top: 0; bottom: 0;
+  border-radius: 4px;
+}
+.tl-dur-scale {
+  display: flex;
+  justify-content: space-between;
+  font-size: 8px;
+  color: var(--gray-mid);
+  margin-top: 2px;
+  letter-spacing: 0.5px;
+}
+
+/* ── Shared legend ── */
+.legend-bar {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin-bottom: 20px;
+  padding: 12px 16px;
+  background: var(--white);
+  border: 1px solid var(--gray-soft);
+  border-radius: 6px;
+  align-items: center;
+}
+.leg { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--text-mid); }
+.leg-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+
+/* Clickable group filter chips */
+.leg.clickable {
+  cursor: pointer;
+  padding: 3px 9px 3px 7px;
+  border-radius: 20px;
+  border: 1px solid var(--gray-soft);
+  user-select: none;
+  transition: all 0.12s;
+}
+.leg.clickable:hover { border-color: var(--gray-mid); background: #f4f3ef; }
+.leg.clickable.active {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: var(--white);
+  font-weight: 600;
+}
+.leg.clickable.dimmed { opacity: 0.4; }
+.leg-note { width:100%; font-weight:700; color:var(--navy); margin-top:4px; font-size:11px; display:flex; align-items:center; gap:10px; }
+.leg-clear {
+  cursor: pointer;
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--blue);
+  background: #eef2ff;
+  border: 1px solid #c8d4f8;
+  border-radius: 20px;
+  padding: 2px 10px;
+  display: none;
+}
+.leg-clear.show { display: inline-block; }
+.leg-clear:hover { background: #dde6ff; }
+
+@media (max-width: 800px) {
+  .cal-grid { grid-template-columns: repeat(2,1fr); }
+  header { padding: 16px 16px 0; }
+  .view { padding: 16px 12px 40px; }
+  .tab-btn { padding: 8px 12px; font-size: 11px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">WHQ Broadcasting · US Conventions</div>
+  <h1>Yearly Schedule — All Views</h1>
+  <p>Choose a view format below · Full task detail with owner tags and dates</p>
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('gantt',this)">① Gantt Bar Chart</button>
+    <button class="tab-btn" onclick="switchTab('calendar',this)">② Monthly Calendar Grid</button>
+    <button class="tab-btn" onclick="switchTab('timeline',this)">③ Phase Timeline</button>
+    <button class="progress-toggle" id="progressToggle" onclick="toggleProgress()">
+      <span class="pt-dot"></span><span class="pt-label">Service Year Progress Filter: Off</span>
+    </button>
+  </div>
+</header>
+
+<!-- ══════════════════════════════════════════════════════════
+     VIEW 1 — GANTT
+══════════════════════════════════════════════════════════ -->
+<div class="view active" id="view-gantt">
+
+  <div class="legend-bar" id="legend-gantt" data-note="Bar color = assigned group (split bars = shared between groups). Click a group to filter."></div>
+
+  <div class="gantt-wrap">
+  <table class="gantt-table" id="ganttTable">
+    <thead>
+      <tr id="ganttHeadRow">
+        <th class="label-col">Task</th>
+      </tr>
+    </thead>
+    <tbody id="ganttBody"></tbody>
+  </table>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     VIEW 2 — MONTHLY CALENDAR GRID
+══════════════════════════════════════════════════════════ -->
+<div class="view" id="view-calendar">
+  <div class="legend-bar" id="legend-calendar" data-note="Card color = assigned group (split cards = shared between groups). Click a group to filter."></div>
+  <div class="cal-grid" id="calGrid"></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     VIEW 3 — PHASE TIMELINE
+══════════════════════════════════════════════════════════ -->
+<div class="view" id="view-timeline">
+  <div class="legend-bar" id="legend-timeline" data-note="Left border = assigned group (split border = shared between groups). Click a group to filter."></div>
+  <div class="timeline-wrap">
+    <div class="timeline-spine"></div>
+    <div id="tlContent"></div>
+  </div>
+</div>
+
+<script>
+// ── Task data ──
+// startMonth / endMonth: 1-12, startDay / endDay: 1-31
+const TASKS = [
+  // HELPDESK / CONVENTION SUPPORT
+  { num:'53', desc:'Schedule Helpdesk Team based on number of conventions each weekend', owner:'US Regional Convention Team · Support', cat:'helpdesk', startMonth:5, startDay:15, endMonth:6, endDay:1 },
+  { num:'72', desc:'Kick-Off Meeting with First PO\'s (Appendix G)', owner:'Support · Zone Contacts & Assistants', cat:'kickoff', startMonth:11, startDay:1, endMonth:12, endDay:1 },
+  { num:'77', desc:'Setup Hub Incidents for all Convention Sites', owner:'Support · Office', cat:'kickoff', startMonth:8, startDay:1, endMonth:8, endDay:31 },
+  { num:'74', desc:'Confirm list of JW Stream and special events from Service Dept', owner:'US Regional Convention Team · Support', cat:'kickoff', startMonth:9, startDay:15, endMonth:9, endDay:30 },
+  { num:'75', desc:'Confirm list of Circuit Assemblies', owner:'US Regional Convention Team · Support', cat:'kickoff', startMonth:9, startDay:15, endMonth:9, endDay:30 },
+  { num:'55', desc:'Convention Site Visits', owner:'Convention Trainers', cat:'sitetraining', startMonth:5, startDay:15, endMonth:8, endDay:31 },
+  { num:'56', desc:'Convention Helpdesk Coverage', owner:'Helpdesk Team', cat:'helpdesk', startMonth:5, startDay:15, endMonth:8, endDay:31 },
+  { num:'71', desc:'Convention Helpdesk Escalation Support', owner:'EFS', cat:'helpdesk', startMonth:5, startDay:15, endMonth:8, endDay:31 },
+
+  // CLOSEOUT
+  { num:'57', desc:'Review number of events per Zone', owner:'US Regional Convention Team', cat:'closeout', startMonth:8, startDay:15, endMonth:8, endDay:31 },
+  { num:'70', desc:'Compile Documentation Suggestions', owner:'US Regional Convention Team', cat:'closeout', startMonth:8, startDay:1, endMonth:8, endDay:15 },
+  { num:'58', desc:'Send email to schedule Lessons Learned Meetings (Appendix T)', owner:'Zone Contacts & Assistants · Support', cat:'design', startMonth:5, startDay:1, endMonth:6, endDay:30 },
+  { num:'67', desc:'Update Hub Venue Incident with Lessons Learned Notes', owner:'Zone Contacts & Assistants · Support', cat:'design', startMonth:6, startDay:15, endMonth:8, endDay:31 },
+  { num:'62', desc:'Request Rooming and Confirm Team Travel', owner:'US Regional Convention Team', cat:'training', startMonth:5, startDay:15, endMonth:6, endDay:1 },
+  { num:'4',  desc:'Review published information & Training (CO-160, CO-160A, CO-1, WHQ Sharepoint, JW CAD) etc', owner:'Zone Contacts & Assistants', cat:'training', startMonth:9, startDay:1, endMonth:9, endDay:30 },
+  { num:'5',  desc:'Lessons Learned meeting (See Appendix T for Steps & Template)', owner:'Zone Contacts & Assistants · Support', cat:'closeout', startMonth:8, startDay:1, endMonth:8, endDay:31 },
+  { num:'6',  desc:'Prepare Summary for Oversight: Repairs, Issues, Training Needs', owner:'US Regional Convention Team', cat:'closeout', startMonth:8, startDay:15, endMonth:8, endDay:31 },
+  { num:'11', desc:'Office sends email to all Program Overseers from previous conventions', owner:'US Regional Convention Team', cat:'kickoff', startMonth:9, startDay:15, endMonth:10, endDay:1 },
+
+  // PLANNING
+  { num:'2',  desc:'Plan Routes and determine equipment purchases', owner:'EFS', cat:'planning', startMonth:10, startDay:1, endMonth:10, endDay:15 },
+  { num:'7',  desc:'Identify Sites for Convention Training', owner:'US Regional Convention Team', cat:'planning', startMonth:9, startDay:15, endMonth:10, endDay:15 },
+  { num:'8',  desc:'Review list of New Sites from HuB', owner:'US Regional Convention Team', cat:'planning', startMonth:9, startDay:1, endMonth:9, endDay:15 },
+  { num:'9',  desc:'Plan equipment routing for Site Visits (Training Kit etc.)', owner:'Convention Trainers', cat:'sitetraining', startMonth:1, startDay:1, endMonth:1, endDay:31 },
+  { num:'68', desc:'Update Convention Training Course Material', owner:'US Regional Convention Team', cat:'sitetraining', startMonth:9, startDay:15, endMonth:12, endDay:1 },
+  { num:'69', desc:'Schedule Online Training', owner:'Convention Trainers', cat:'sitetraining', startMonth:2, startDay:1, endMonth:2, endDay:15 },
+  { num:'10A',desc:'Draft Letter to Program Overseers (new venues) & rented venues', owner:'US Regional Convention Team · Office', cat:'kickoff', startMonth:9, startDay:1, endMonth:9, endDay:15 },
+
+  // MAINTENANCE
+  { num:'12', desc:'Review Tech Chat & Hub Incidents Recommend Repair & Replacements', owner:'EFS · AVD Oversight · US Regional Convention Team', cat:'maintenance', startMonth:9, startDay:1, endMonth:9, endDay:30 },
+  { num:'13', desc:'Test & Upgrade Firmware for Convention Equipment', owner:'EFS', cat:'maintenance', startMonth:11, startDay:1, endMonth:12, endDay:31 },
+  { num:'16', desc:'Zone Contacts & Assistants to update Hub cards with list of changes & close all support cards', owner:'Zone Contacts & Assistants', cat:'closeout', startMonth:9, startDay:15, endMonth:9, endDay:30 },
+  { num:'17', desc:'Confirm AV Hub Designs have long lead items added (Video Walls, TVs)', owner:'Zone Contacts & Assistants', cat:'design', startMonth:10, startDay:15, endMonth:10, endDay:31 },
+  { num:'25', desc:'Convention Equipment Crew to Construct new Equipment purchased', owner:'EFS', cat:'maintenance', startMonth:3, startDay:1, endMonth:3, endDay:15 },
+  { num:'26', desc:'Media Players are imaged for convention season', owner:'EFS', cat:'maintenance', startMonth:11, startDay:1, endMonth:12, endDay:31 },
+  { num:'27', desc:'Confirm list for firmware upgrades needed', owner:'EFS · AVD Oversight · US Regional Convention Team', cat:'maintenance', startMonth:3, startDay:1, endMonth:3, endDay:15 },
+  { num:'28', desc:'All Convention Equipment to be received for Assembling', owner:'EFS', cat:'maintenance', startMonth:3, startDay:1, endMonth:3, endDay:15 },
+
+  // ORDERS
+  { num:'14', desc:'Long Lead Items Ordered from China for Conventions', owner:'EFS', cat:'orders', startMonth:10, startDay:15, endMonth:11, endDay:1 },
+  { num:'15', desc:'Approval to Order Equipment', owner:'EFS · AVD Oversight', cat:'orders', startMonth:12, startDay:1, endMonth:12, endDay:31 },
+  { num:'18', desc:'All Convention Equipment for season to be ordered', owner:'EFS', cat:'orders', startMonth:1, startDay:31, endMonth:2, endDay:1 },
+  { num:'24', desc:'All Convention Equipment for the islands in Hub for shipping', owner:'Zone Contacts & Assistants', cat:'design', startMonth:2, startDay:1, endMonth:2, endDay:15 },
+  { num:'49', desc:'Fixed Asset Review Submitted to Office', owner:'EFS', cat:'orders', startMonth:4, startDay:1, endMonth:4, endDay:15 },
+  { num:'50', desc:'Equipment starts shipping to the field', owner:'EFS', cat:'orders', startMonth:4, startDay:1, endMonth:4, endDay:15 },
+
+  // DESIGN
+  { num:'21', desc:'Update Template – Locally Supplied Excel Sheet', owner:'Support', cat:'kickoff', startMonth:1, startDay:1, endMonth:1, endDay:15 },
+  { num:'22', desc:'Load from HuB spreadsheet with all venues, first event date, last event, and 1 week after last event', owner:'Support', cat:'kickoff', startMonth:1, startDay:1, endMonth:1, endDay:15 },
+  { num:'23', desc:'Compile Suggested updates to CO-160a, CO-160, CO-162', owner:'US Regional Convention Team', cat:'coordination', startMonth:9, startDay:1, endMonth:9, endDay:30 },
+  { num:'78', desc:'Review: Confirm Equipment lists show Generic Video walls', owner:'Support · Zone Contacts & Assistants', cat:'designreview', startMonth:4, startDay:15, endMonth:4, endDay:30 },
+  { num:'29', desc:'Markup minor designs with PDF editor', owner:'Zone Contacts & Assistants', cat:'design', startMonth:12, startDay:15, endMonth:3, endDay:1 },
+  { num:'30', desc:'Add Equipment to Hub Design Card for initial review', owner:'Zone Contacts & Assistants', cat:'design', startMonth:12, startDay:15, endMonth:2, endDay:15 },
+  { num:'31', desc:'Send First Redlines to Documentation Team', owner:'Zone Contacts & Assistants · Documentation Team', cat:'design', startMonth:12, startDay:1, endMonth:1, endDay:15 },
+  { num:'76', desc:'Send Second Redlines to Documentation Team', owner:'Zone Contacts & Assistants · Documentation Team', cat:'design', startMonth:2, startDay:15, endMonth:3, endDay:1 },
+  { num:'32', desc:'Send Design to AV Design Reviewer (Appendix R)', owner:'Zone Contacts & Assistants · AV Reviewer', cat:'design', startMonth:2, startDay:1, endMonth:3, endDay:1 },
+  { num:'33', desc:'Update the Locally Supplied Excel Sheet for each Venue', owner:'Zone Contacts & Assistants · Support', cat:'design', startMonth:2, startDay:1, endMonth:3, endDay:1 },
+  { num:'35', desc:'Convention Roadmap Meetings', owner:'US Regional Convention Team', cat:'coordination', startMonth:8, startDay:1, endMonth:8, endDay:31 },
+  { num:'36', desc:'Copy DSP scene file to "Final" Folder for JW Drive upload (Appendix Q)', owner:'Zone Contacts & Assistants', cat:'designreview', startMonth:2, startDay:21, endMonth:3, endDay:1 },
+  { num:'38', desc:'Provide feedback for Streamed Meeting (Program Overseers & AV Depts)', owner:'US Regional Convention Team', cat:'design', startMonth:1, startDay:1, endMonth:2, endDay:15 },
+  { num:'39', desc:'Finalize AV Design Cards (Appendix A)', owner:'Zone Contacts & Assistants', cat:'design', startMonth:2, startDay:1, endMonth:3, endDay:15 },
+  { num:'40', desc:'All Convention Designs marked Approved in Hub', owner:'US Regional Convention Team', cat:'design', startMonth:3, startDay:15, endMonth:3, endDay:20 },
+  { num:'20', desc:'Site Visits and Evaluations for New Venues (Appendix D)', owner:'Zone Contacts & Assistants', cat:'newsites', startMonth:11, startDay:1, endMonth:1, endDay:15 },
+  { num:'79', desc:'Schedule new site & evaluation visits', owner:'Zone Contacts & Assistants', cat:'newsites', startMonth:10, startDay:1, endMonth:10, endDay:31 },
+
+  // TRAINING
+  { num:'19', desc:'Yearly Training at Tuxedo – Convention Equipment and Design (1 week)', owner:'Zone Contacts & Assistants · Helpdesk Team', cat:'training', startMonth:12, startDay:1, endMonth:12, endDay:15 },
+  { num:'43', desc:'Zone Contacts & Assistants to meet with first Program Overseer for each New Venue (Appendix C)', owner:'Zone Contacts & Assistants', cat:'kickoff', startMonth:4, startDay:1, endMonth:4, endDay:15 },
+  { num:'44', desc:'Convention Streamed Meeting with Program Overseers & AV Departments', owner:'AVD Oversight', cat:'events', startMonth:4, startDay:1, endMonth:4, endDay:15 },
+  { num:'45', desc:'Kick off Meeting for Help Desk Support', owner:'US Regional Convention Team', cat:'events', startMonth:4, startDay:15, endMonth:5, endDay:1 },
+  { num:'46', desc:'Individual Training on Helpdesk Team process (Call Log, Calls, Teams)', owner:'Helpdesk Team', cat:'helpdesk', startMonth:4, startDay:15, endMonth:5, endDay:1 },
+  { num:'47', desc:'Finalize Schedule for Helpdesk Team Support', owner:'US Regional Convention Team · Support', cat:'helpdesk', startMonth:4, startDay:15, endMonth:5, endDay:1 },
+  { num:'48', desc:'First Convention recording at Newburgh & start of convention season', owner:'TMS', cat:'events', startMonth:5, startDay:1, endMonth:5, endDay:15 },
+  { num:'65', desc:'Compile list of Receive sites from International Conventions', owner:'US Regional Convention Team', cat:'events', startMonth:3, startDay:1, endMonth:3, endDay:15 },
+  { num:'66', desc:'Compile list of Stream sites for Prisons', owner:'US Regional Convention Team', cat:'events', startMonth:3, startDay:1, endMonth:3, endDay:15 },
+
+  // UPLOAD
+  { num:'41', desc:'Notify Service Dept which videos/files need to be posted on JWHub', owner:'US Regional Convention Team · EFS', cat:'design', startMonth:4, startDay:1, endMonth:4, endDay:5 },
+  { num:'42', desc:'Upload designs and configs from Final Folders to JWDrive (Appendix P)', owner:'Documentation Team', cat:'design', startMonth:4, startDay:1, endMonth:4, endDay:5 },
+
+  // BUDGET
+  { num:'51', desc:'Convention Equipment Upgrade Finalized (Research and Pricing)', owner:'EFS', cat:'budget', startMonth:5, startDay:1, endMonth:5, endDay:31 },
+  { num:'52', desc:'Yearly Budget due by June 20th for Major items', owner:'US Regional Convention Team · Zone Contacts & Assistants', cat:'budget', startMonth:6, startDay:1, endMonth:6, endDay:20 },
+  { num:'63', desc:'Determine needs per zone for next year\'s budget', owner:'US Regional Convention Team · Zone Contacts & Assistants', cat:'budget', startMonth:5, startDay:1, endMonth:6, endDay:15 },
+  { num:'64', desc:'Island Equipment needs Identify', owner:'Zone Contacts & Assistants', cat:'budget', startMonth:5, startDay:1, endMonth:6, endDay:15 },
+];
+
+const CAT_COLORS = {
+  helpdesk:    'var(--c-helpdesk)',
+  closeout:    'var(--c-closeout)',
+  planning:    'var(--c-planning)',
+  maintenance: 'var(--c-maintenance)',
+  orders:      'var(--c-orders)',
+  design:      'var(--c-design)',
+  training:    'var(--c-training)',
+  upload:      'var(--c-upload)',
+  budget:      'var(--c-budget)',
+  events:      'var(--c-events)',
+  sitetraining:'var(--c-sitetraining)',
+  kickoff:     'var(--c-kickoff)',
+  zonecloseout:'var(--c-zonecloseout)',
+  designreview:'var(--c-designreview)',
+  coordination:'var(--c-coordination)',
+  newsites:    'var(--c-newsites)',
+};
+
+const CAT_LABELS = {
+  helpdesk:'Convention Support & Helpdesk', closeout:'Service Year Closeout', planning:'Planning',
+  maintenance:'Equipment Repair Maintenance Firmware Updates', orders:'Equipment Orders', design:'Design',
+  training:'US Regional Convention Team Training', upload:'Upload', budget:'Budget', events:'Events', sitetraining:'Convention Site Training', kickoff:'Service Year Kick Off', zonecloseout:'Zone Close Out', designreview:'Design Review & Config Completion', coordination:'Coordination', newsites:'New Convention Sites or Major Design Changes',
+};
+
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+// ── Dynamic "current month first" ordering ──
+const NOW = new Date();
+const CUR_MONTH = NOW.getMonth() + 1; // 1-12
+const CUR_DAY = NOW.getDate();
+// Month order starting at the current month, rolling forward 12 months
+const SY_MONTHS = Array.from({length: 12}, (_, i) => ((CUR_MONTH - 1 + i) % 12) + 1);
+
+// ── Group / assignment color mapping (for Gantt bars) ──
+const GROUP_COLORS = {
+  'Zone Contacts & Assistants':            'var(--g-avcontacts)',
+  'AV Reviewer':                 'var(--g-avreviewer)',
+  'AVD Oversight':               'var(--g-avdoversight)',
+  'EFS':                         'var(--g-efs)',
+  'Office':                      'var(--g-office)',
+  'TMS':                         'var(--g-tms)',
+  'US Regional Convention Team': 'var(--g-usrct)',
+  'Helpdesk Team':              'var(--g-helpdesk)',
+  'Support':                    'var(--g-support)',
+  'Convention Trainers':        'var(--g-trainers)',
+  'Documentation Team':         'var(--g-documentation)',
+};
+
+// Parse an owner string like "US Regional Convention Team · Zone Contacts & Assistants" into an array of groups
+function parseGroups(owner) {
+  return owner.split('·').map(s => s.trim());
+}
+// Build a CSS background: solid for 1 group, hard-edged gradient split for 2+
+function groupBackground(owner) {
+  const groups = parseGroups(owner);
+  const colors = groups.map(g => GROUP_COLORS[g] || 'var(--gray-mid)');
+  if (colors.length === 1) return colors[0];
+  const n = colors.length;
+  const stops = colors.map((c, i) => {
+    const from = (i / n * 100).toFixed(2);
+    const to = ((i + 1) / n * 100).toFixed(2);
+    return `${c} ${from}%, ${c} ${to}%`;
+  });
+  return `linear-gradient(90deg, ${stops.join(', ')})`;
+}
+
+
+// ── helper: day of year (1-365)
+function doy(month, day) { 
+  const days=[0,31,59,90,120,151,181,212,243,273,304,334];
+  return days[month-1]+day;
+}
+const YEAR_DAYS = 365;
+
+// Order tasks relative to the CURRENT month: current month = 0, rolling forward.
+function serviceYearKey(month, day) {
+  const offset = (month - CUR_MONTH + 12) % 12; // current month=0 ... 11
+  return offset * 31 + day;
+}
+function sortByServiceYearStart(a, b) {
+  return serviceYearKey(a.startMonth, a.startDay) - serviceYearKey(b.startMonth, b.startDay);
+}
+
+// Position of a date on the duration-bar track that STARTS Sept 1 (Sept 1 = 0,
+// ramping to ~371 the following Aug 31). Used for the timeline duration bars.
+function serviceYearTrackPos(month, day) {
+  const dayOfYear = (month - 1) * 31 + day;
+  const boundary  = (9 - 1) * 31 + 1; // Sept 1
+  let pos = dayOfYear - boundary;
+  if (pos < 0) pos += 12 * 31; // dates before Sept 1 wrap to the end of the track
+  return pos;
+}
+
+// Service year resets Aug 15 and runs to the following Aug 14. We order every
+// task's END date on the service-year timeline (seasonStart = most recent Aug 15),
+// then a task is "past" only if its end falls between seasonStart and today.
+const SY_BOUNDARY_MONTH = 8;   // August
+const SY_BOUNDARY_DAY = 15;    // 15th
+
+function isPastTask(t) {
+  const yr = NOW.getFullYear();
+  const today = new Date(yr, CUR_MONTH - 1, CUR_DAY, 0, 0, 0);
+
+  // Most recent reset (Aug 15) on/before today:
+  let resetYear = yr;
+  const thisYearReset = new Date(yr, SY_BOUNDARY_MONTH - 1, SY_BOUNDARY_DAY, 0, 0, 0);
+  if (today < thisYearReset) resetYear = yr - 1;
+  const seasonStart = new Date(resetYear, SY_BOUNDARY_MONTH - 1, SY_BOUNDARY_DAY, 0, 0, 0);
+  const seasonEnd   = new Date(resetYear + 1, SY_BOUNDARY_MONTH - 1, SY_BOUNDARY_DAY, 0, 0, 0); // next Aug 15
+
+  // Place the task's END date on the timeline so it lands within [seasonStart, seasonEnd).
+  // Special case: end dates in the Aug 15–31 window are END-of-season tasks (they run
+  // right up to the next reset), so pin them to the upcoming August, not season start.
+  let endYearForTask = resetYear;
+  const endsInResetWindow = (t.endMonth === SY_BOUNDARY_MONTH && t.endDay >= SY_BOUNDARY_DAY);
+  if (endsInResetWindow) endYearForTask = resetYear + 1;
+
+  let endDate = new Date(endYearForTask, t.endMonth - 1, t.endDay, 23, 59, 59);
+  if (endDate < seasonStart) {
+    endDate = new Date(endYearForTask + 1, t.endMonth - 1, t.endDay, 23, 59, 59);
+  }
+  // A task is past only if its placed end date is before today (and within this season).
+  return endDate >= seasonStart && endDate < today;
+}
+
+// ═══════════════════════════════════
+// BUILD GANTT
+// ═══════════════════════════════════
+function buildGantt() {
+  const body = document.getElementById('ganttBody');
+  const headRow = document.getElementById('ganttHeadRow');
+
+  // Build dynamic month header in current-month-first order
+  SY_MONTHS.forEach((m, idx) => {
+    const th = document.createElement('th');
+    th.className = 'gantt-month';
+    if (m === CUR_MONTH) th.classList.add('current-month');
+    th.textContent = MONTHS[m-1].slice(0,3).toUpperCase();
+    headRow.appendChild(th);
+  });
+
+  // Group by category
+  const groups = {};
+  TASKS.forEach(t => {
+    if (!groups[t.cat]) groups[t.cat] = [];
+    groups[t.cat].push(t);
+  });
+  // Sort each section's tasks by start date relative to current month
+  Object.keys(groups).forEach(cat => groups[cat].sort(sortByServiceYearStart));
+
+  const catOrder = CAT_ORDER;
+  catOrder.forEach(cat => {
+    if (!groups[cat]) return;
+    // Group header row
+    const gr = document.createElement('tr');
+    gr.className = 'gantt-group';
+    gr.dataset.section = cat;
+    const gTd = document.createElement('td');
+    gTd.colSpan = 13;
+    gTd.textContent = CAT_LABELS[cat].toUpperCase();
+    gr.appendChild(gTd);
+    body.appendChild(gr);
+
+    groups[cat].forEach(task => {
+      const tr = document.createElement('tr');
+      tr.className = 'gantt-row';
+      tr.dataset.section = cat;
+      tr.dataset.groups = parseGroups(task.owner).join('|');
+      if (isPastTask(task)) tr.classList.add('is-past');
+
+      // Label cell — sequential top-to-bottom number (stable across all tabs)
+      const labelTd = document.createElement('td');
+      labelTd.className = 'row-label';
+      labelTd.innerHTML = `<strong>${task.seq}.</strong> ${task.desc}<br><small style="color:var(--gray-mid)">${task.owner}</small>`;
+      tr.appendChild(labelTd);
+
+      // 12 month cells in current-month-first order
+      SY_MONTHS.forEach((m, colIdx) => {
+        const td = document.createElement('td');
+        td.className = 'gantt-cell';
+        if (m === CUR_MONTH) td.classList.add('current-month');
+        td.style.position = 'relative';
+
+        // Task start/end in doy, handle wrap
+        let tStart = doy(task.startMonth, task.startDay);
+        let tEnd   = doy(task.endMonth,   task.endDay);
+        if (tEnd < tStart) tEnd += YEAR_DAYS;
+
+        const cStart = doy(m, 1);
+        const cEnd   = doy(m, 28);
+        const overlap = tStart <= cEnd && tEnd >= cStart;
+
+        if (overlap) {
+          const bar = document.createElement('div');
+          bar.className = 'gantt-bar';
+          bar.style.background = groupBackground(task.owner);
+
+          const cellDays = 30;
+          const barStartInCell = Math.max(0, tStart - cStart);
+          const barEndInCell   = Math.min(cellDays, tEnd - cStart);
+          const leftPct  = (barStartInCell / cellDays) * 100;
+          const rightPct = ((cellDays - barEndInCell) / cellDays) * 100;
+          bar.style.left  = leftPct + '%';
+          bar.style.right = rightPct + '%';
+          bar.title = `${task.seq}. ${task.desc} · ${task.owner}`;
+
+          // Show label text only in the first visible column of the bar
+          if (m === task.startMonth) {
+            bar.innerHTML = `<span class="task-num-g">${task.seq}</span><span style="overflow:hidden;text-overflow:ellipsis">${task.desc}</span>`;
+          }
+          td.appendChild(bar);
+        }
+        tr.appendChild(td);
+      });
+      body.appendChild(tr);
+    });
+  });
+}
+
+// ═══════════════════════════════════
+// BUILD CALENDAR GRID
+// ═══════════════════════════════════
+function buildCalendar() {
+  const grid = document.getElementById('calGrid');
+  SY_MONTHS.forEach(m => {
+    const col = document.createElement('div');
+    col.className = 'cal-month';
+    if (m === CUR_MONTH) col.classList.add('current-month');
+
+    const hdr = document.createElement('div');
+    hdr.className = 'cal-month-header';
+    hdr.textContent = MONTHS[m-1].toUpperCase();
+    col.appendChild(hdr);
+
+    const tasksDiv = document.createElement('div');
+    tasksDiv.className = 'cal-tasks';
+
+    const monthTasks = TASKS.filter(t => {
+      let tStart = doy(t.startMonth, t.startDay);
+      let tEnd   = doy(t.endMonth,   t.endDay);
+      if (tEnd < tStart) tEnd += YEAR_DAYS;
+      const cStart = doy(m, 1);
+      const cEnd   = doy(m, 28);
+      return tStart <= cEnd && tEnd >= cStart;
+    }).sort(sortByServiceYearStart);
+
+    if (monthTasks.length === 0) {
+      tasksDiv.innerHTML = '<div class="cal-empty">No tasks this month</div>';
+    } else {
+      monthTasks.forEach(t => {
+        const el = document.createElement('div');
+        el.className = 'cal-task';
+        if (isPastTask(t)) el.classList.add('is-past');
+        el.dataset.groups = parseGroups(t.owner).join('|');
+        el.style.background = groupBackground(t.owner);
+        el.style.textShadow = '0 1px 2px rgba(0,0,0,0.55)';
+        const dateStr = t.startMonth === t.endMonth
+          ? `${MONTHS[t.startMonth-1].slice(0,3)} ${t.startDay} – ${t.endDay}`
+          : `${MONTHS[t.startMonth-1].slice(0,3)} ${t.startDay} – ${MONTHS[t.endMonth-1].slice(0,3)} ${t.endDay}`;
+        el.innerHTML = `<span class="ct-num">${t.seq}.</span>${t.desc}<span class="ct-dates">📅 ${dateStr}</span><span class="ct-owner">${t.owner}</span>`;
+        tasksDiv.appendChild(el);
+      });
+    }
+
+    col.appendChild(tasksDiv);
+    grid.appendChild(col);
+  });
+}
+
+// ═══════════════════════════════════
+// BUILD TIMELINE
+// ═══════════════════════════════════
+function buildTimeline() {
+  const content = document.getElementById('tlContent');
+
+  SY_MONTHS.forEach(m => {
+    const monthTasks = TASKS.filter(t => {
+      // Show task in the month it STARTS (primary placement)
+      return t.startMonth === m;
+    }).sort(sortByServiceYearStart);
+
+    const band = document.createElement('div');
+    band.className = 'tl-month-band';
+    if (m === CUR_MONTH) band.classList.add('current-month');
+
+    const labelRow = document.createElement('div');
+    labelRow.className = 'tl-month-label';
+    labelRow.innerHTML = `
+      <div class="tl-month-dot"></div>
+      <div class="tl-month-name">${MONTHS[m-1]}</div>
+      <div class="tl-month-line"></div>
+    `;
+    band.appendChild(labelRow);
+
+    if (monthTasks.length === 0) {
+      const empty = document.createElement('div');
+      empty.style.cssText = 'color:var(--gray-mid);font-size:11px;font-style:italic;padding:4px 0 8px;';
+      empty.textContent = 'No new tasks start this month';
+      band.appendChild(empty);
+    } else {
+      const taskWrap = document.createElement('div');
+      taskWrap.className = 'tl-tasks';
+      monthTasks.forEach(t => {
+        const dateStr = t.startMonth === t.endMonth
+          ? `${MONTHS[t.startMonth-1].slice(0,3)} ${t.startDay} – ${t.endDay}`
+          : `${MONTHS[t.startMonth-1].slice(0,3)} ${t.startDay} – ${MONTHS[t.endMonth-1].slice(0,3)} ${t.endDay}`;
+
+        // Duration in days (handle wrap), then human label
+        let tStart = doy(t.startMonth, t.startDay);
+        let tEnd   = doy(t.endMonth, t.endDay);
+        if (tEnd < tStart) tEnd += YEAR_DAYS;
+        const durDays = tEnd - tStart + 1;
+        let durLabel;
+        if (durDays <= 10)      durLabel = `${durDays} days`;
+        else if (durDays < 45)  durLabel = `${Math.round(durDays/7)} wks`;
+        else                    durLabel = `${(durDays/30.4).toFixed(1)} mo`;
+
+        // Position the fill on a service-year track that starts Aug 15
+        const trackStart = serviceYearTrackPos(t.startMonth, t.startDay);
+        let leftPct = (trackStart / (12*31)) * 100;
+        let widthPct = ((durDays) / (12*31)) * 100;
+        if (leftPct + widthPct > 100) widthPct = 100 - leftPct; // clamp at track end
+
+        const el = document.createElement('div');
+        el.className = 'tl-task';
+        if (isPastTask(t)) el.classList.add('is-past');
+        el.dataset.groups = parseGroups(t.owner).join('|');
+        const bg = groupBackground(t.owner);
+        if (bg.startsWith('linear-gradient')) {
+          el.style.borderLeftColor = 'transparent';
+          el.style.borderImage = bg.replace('90deg', 'to bottom') + ' 1';
+          el.style.borderImageSlice = '1';
+        } else {
+          el.style.borderLeftColor = bg;
+        }
+        const fillBg = bg.startsWith('linear-gradient') ? bg : bg;
+        // One colored bubble per assigned group, matching the legend colors
+        const ownerBubbles = parseGroups(t.owner).map(g => {
+          const c = GROUP_COLORS[g] || 'var(--gray-mid)';
+          return `<span class="tl-tag owner-group" style="background:${c};">${g}</span>`;
+        }).join('');
+        el.innerHTML = `
+          <span class="tl-task-num">${t.seq}</span>
+          <div class="tl-task-body">
+            <div class="tl-task-desc">${t.desc}</div>
+            <div class="tl-task-meta">
+              ${ownerBubbles}
+              <span class="tl-tag cat">${CAT_LABELS[t.cat]}</span>
+              <span class="tl-tag dates">${dateStr}</span>
+              <span class="tl-tag dur">⏱ ${durLabel}</span>
+            </div>
+            <div class="tl-dur-track">
+              <div class="tl-dur-fill" style="left:${leftPct}%;width:${widthPct}%;background:${fillBg};"></div>
+            </div>
+            <div class="tl-dur-scale">
+              <span>Sep</span>
+              <span>Dec</span>
+              <span>Mar</span>
+              <span>Jun</span>
+              <span>Aug</span>
+            </div>
+          </div>
+        `;
+        taskWrap.appendChild(el);
+      });
+      band.appendChild(taskWrap);
+    }
+
+    band.dataset.hasTasks = monthTasks.length > 0 ? '1' : '0';
+    content.appendChild(band);
+  });
+}
+
+// ═══════════════════════════════════
+// GROUP FILTERING ENGINE
+// ═══════════════════════════════════
+// Active filter is a Set of selected group names (empty = show all)
+const activeFilter = new Set();
+
+function buildLegends() {
+  const groupNames = Object.keys(GROUP_COLORS);
+  ['gantt','calendar','timeline'].forEach(view => {
+    const bar = document.getElementById('legend-' + view);
+    if (!bar) return;
+    bar.innerHTML = '';
+    groupNames.forEach(name => {
+      const chip = document.createElement('div');
+      chip.className = 'leg clickable';
+      chip.dataset.group = name;
+      chip.innerHTML = `<div class="leg-dot" style="background:${GROUP_COLORS[name]}"></div>${name}`;
+      chip.addEventListener('click', () => toggleGroup(name));
+      bar.appendChild(chip);
+    });
+    // Note + clear-all row
+    const note = document.createElement('div');
+    note.className = 'leg-note';
+    note.innerHTML = `<span>${bar.dataset.note || ''}</span><span class="leg-clear" data-view="${view}">Clear filter ✕</span>`;
+    bar.appendChild(note);
+    note.querySelector('.leg-clear').addEventListener('click', clearFilter);
+  });
+  refreshChips();
+}
+
+function toggleGroup(name) {
+  if (activeFilter.has(name)) activeFilter.delete(name);
+  else activeFilter.add(name);
+  applyFilter();
+  refreshChips();
+}
+
+function clearFilter() {
+  activeFilter.clear();
+  applyFilter();
+  refreshChips();
+}
+
+// Update chip visuals + clear buttons across all legends
+function refreshChips() {
+  const any = activeFilter.size > 0;
+  document.querySelectorAll('.leg.clickable').forEach(chip => {
+    const g = chip.dataset.group;
+    chip.classList.toggle('active', activeFilter.has(g));
+    chip.classList.toggle('dimmed', any && !activeFilter.has(g));
+  });
+  document.querySelectorAll('.leg-clear').forEach(btn => btn.classList.toggle('show', any));
+}
+
+// A task's groups string (pipe-separated) matches if ANY of its groups is selected
+function rowMatches(groupsAttr) {
+  if (activeFilter.size === 0) return true;
+  const groups = (groupsAttr || '').split('|');
+  return groups.some(g => activeFilter.has(g));
+}
+
+function applyFilter() {
+  // ── Gantt: rows + hide section headers with no visible rows ──
+  const ganttBody = document.getElementById('ganttBody');
+  if (ganttBody) {
+    // First pass: show/hide task rows, tally per section
+    const sectionHasVisible = {};
+    ganttBody.querySelectorAll('tr.gantt-row').forEach(tr => {
+      const show = rowMatches(tr.dataset.groups);
+      tr.style.display = show ? '' : 'none';
+      if (show) sectionHasVisible[tr.dataset.section] = true;
+    });
+    // Second pass: hide empty section headers
+    ganttBody.querySelectorAll('tr.gantt-group').forEach(gr => {
+      gr.style.display = sectionHasVisible[gr.dataset.section] ? '' : 'none';
+    });
+  }
+
+  // ── Calendar: cards + "no tasks" placeholder per month ──
+  document.querySelectorAll('#calGrid .cal-month').forEach(col => {
+    const tasksDiv = col.querySelector('.cal-tasks');
+    const cards = tasksDiv.querySelectorAll('.cal-task');
+    let visible = 0;
+    cards.forEach(c => {
+      const show = rowMatches(c.dataset.groups);
+      c.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    // Manage placeholder
+    let placeholder = tasksDiv.querySelector('.cal-empty');
+    if (cards.length > 0) {
+      if (visible === 0) {
+        if (!placeholder) {
+          placeholder = document.createElement('div');
+          placeholder.className = 'cal-empty';
+          tasksDiv.appendChild(placeholder);
+        }
+        placeholder.textContent = 'No matching tasks';
+        placeholder.style.display = '';
+      } else if (placeholder) {
+        placeholder.style.display = 'none';
+      }
+    }
+  });
+
+  // ── Timeline: tasks + hide month bands with no visible tasks ──
+  document.querySelectorAll('#tlContent .tl-month-band').forEach(band => {
+    const tasks = band.querySelectorAll('.tl-task');
+    let visible = 0;
+    tasks.forEach(t => {
+      const show = rowMatches(t.dataset.groups);
+      t.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    // Hide the whole band (month) if it had tasks but none match
+    if (band.dataset.hasTasks === '1') {
+      band.style.display = visible === 0 ? 'none' : '';
+    }
+  });
+}
+
+// ═══════════════════════════════════
+// Tab switching (resets filter)
+// ═══════════════════════════════════
+function switchTab(view, btn) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('view-' + view).classList.add('active');
+  btn.classList.add('active');
+  // Reset filter when switching tabs
+  activeFilter.clear();
+  applyFilter();
+  refreshChips();
+}
+
+// ═══════════════════════════════════
+// PROGRESS FILTER TOGGLE (off by default)
+// ═══════════════════════════════════
+let progressOn = false;
+function toggleProgress() {
+  progressOn = !progressOn;
+  document.body.classList.toggle('progress-on', progressOn);
+  const btn = document.getElementById('progressToggle');
+  btn.classList.toggle('on', progressOn);
+  btn.querySelector('.pt-label').textContent = 'Service Year Progress Filter: ' + (progressOn ? 'On' : 'Off');
+}
+
+// ── Assign a stable sequential number (matching Gantt top-to-bottom order) to every task ──
+const CAT_ORDER = ['planning','kickoff','maintenance','orders','newsites','design','designreview','helpdesk','zonecloseout','closeout','coordination','training','sitetraining','upload','budget','events'];
+function assignSeq() {
+  const groups = {};
+  TASKS.forEach(t => { (groups[t.cat] = groups[t.cat] || []).push(t); });
+  Object.keys(groups).forEach(cat => groups[cat].sort(sortByServiceYearStart));
+  let n = 0;
+  CAT_ORDER.forEach(cat => {
+    if (!groups[cat]) return;
+    groups[cat].forEach(t => { t.seq = ++n; });
+  });
+}
+
+// Init all 3
+assignSeq();
+buildGantt();
+buildCalendar();
+buildTimeline();
+buildLegends();
+
+// Auto-scroll the active view to the current month on load.
+// Gantt: scroll the horizontal wrapper so the current-month column is in view.
+// Calendar/Timeline: current month is already first in order, so they start at top.
+window.addEventListener('load', () => {
+  // The current month is always the FIRST column/box/band now, so views start aligned.
+  // For the Gantt, ensure the wrapper is scrolled fully left (current month leads).
+  const gw = document.querySelector('.gantt-wrap');
+  if (gw) gw.scrollLeft = 0;
+});
+</script>
+</body>
+</html>
